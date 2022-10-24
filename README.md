@@ -33,7 +33,7 @@ Database creation
 php artisan migrate
 ```
 
-Additional features
+### Additional features
 
 Fake data generation
 ``` bash
