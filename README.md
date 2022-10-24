@@ -9,3 +9,43 @@ Basic Laravel project for architecture Porto and also a small test task
 - [Swagger](https://github.com/DarkaOnLine/L5-Swagger?ysclid=l9lv0y79lt190343942)
 - [Data Transfer Object](https://github.com/spatie/data-transfer-object?ysclid=l9lv0a72yl154342806)
 - [Fractal](https://github.com/spatie/laravel-fractal?ysclid=l9lv0ltaw3330622122)
+
+## Installation
+
+Cloning the repository
+``` bash
+git clone https://github.com/Web-Implementator/laravel-porto.git
+```
+
+Copy and edit config .env file
+``` bash
+cd ./laravel-porto
+cp .env.example .env
+```
+
+Install composer dependencies
+``` bash
+composer install
+```
+
+Database creation
+``` bash
+php artisan migrate
+```
+
+Additional features
+
+Fake data generation
+``` bash
+php artisan db:seed
+```
+
+Generation of API documentation
+``` bash
+php artisan l5-swagger:generate
+```
+
+Running Autotests
+``` bash
+php artisan test
+```
