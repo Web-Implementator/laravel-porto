@@ -28,6 +28,11 @@ Install composer dependencies
 composer install
 ```
 
+Generate App key
+``` bash
+php artisan key:generate
+```
+
 Database creation
 ``` bash
 php artisan migrate
