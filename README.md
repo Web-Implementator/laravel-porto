@@ -46,12 +46,12 @@ Fake data generation
 php artisan db:seed
 ```
 
-Generation of API documentation
+Start Horizon
 ``` bash
 php artisan horizon
 ```
 
-Start Horizon
+Generation of API documentation
 ``` bash
 php artisan l5-swagger:generate
 ```
