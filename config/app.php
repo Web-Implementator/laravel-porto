@@ -194,6 +194,7 @@ return [
         // App\Ship\Generic\Providers\BroadcastServiceProvider::class,
         App\Ship\Generic\Providers\EventServiceProvider::class,
         App\Ship\Generic\Providers\RouteServiceProvider::class,
+        App\Ship\Generic\Providers\HorizonServiceProvider::class,
 
     ],
 
