@@ -49,6 +49,11 @@ Database creation
 php artisan migrate
 ```
 
+Horizon install, after installation, delete the created provider from the folder /App/Provider
+``` bash
+php artisan horizon:install
+```
+
 ### Additional features
 
 Fake data generation
