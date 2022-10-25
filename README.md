@@ -13,12 +13,12 @@ Basic Laravel project for architecture Porto and also a small test task
 
 All tests must be placed inside the example container
 ``` bash
-/App/Containers/*/Tests
+App/Containers/*/Tests
 ```
 
 All migrations must be placed inside the example container
 ``` bash
-/App/Containers/*/Migrations
+App/Containers/*/Migrations
 ```
 
 ## Installation
@@ -49,7 +49,7 @@ Database creation
 php artisan migrate
 ```
 
-Horizon install, after installation, delete the created provider from the folder /App/Provider
+Horizon install, after installation, delete the created provider from the folder App/Provider
 ``` bash
 php artisan horizon:install
 ```
