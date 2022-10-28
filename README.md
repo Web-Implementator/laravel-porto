@@ -14,7 +14,7 @@ Additional requirements:
 
 ## About Project
 
-Basic Laravel project for architecture Porto and also
+Basic Laravel project for architecture Porto
 
 - [Laravel 9.3](https://github.com/laravel/laravel?ysclid=l9luwglcyd378360370)
 - [Porto architecture](https://github.com/Mahmoudz/Porto)
