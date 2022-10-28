@@ -1,8 +1,20 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
+## About Small Task
+
+Two lists are given:
+- car list
+- a list of users
+
+Need to make an API for renting a car.
+
+Additional requirements:
+- at one time, 1 user can drive only one car
+- only 1 user can drive 1 car at a time
+
 ## About Project
 
-Basic Laravel project for architecture Porto and also a small test task
+Basic Laravel project for architecture Porto and also
 
 - [Laravel 9.3](https://github.com/laravel/laravel?ysclid=l9luwglcyd378360370)
 - [Porto architecture](https://github.com/Mahmoudz/Porto)
