@@ -216,6 +216,8 @@ return [
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'Request' => Illuminate\Http\Request::class,
         'JsonResponse' => Illuminate\Http\JsonResponse::class,
+        'Response' => Illuminate\Http\Response::class,
+        'RedirectResponse' => Illuminate\Http\RedirectResponse::class,
         'Validator' => Illuminate\Contracts\Validation\Validator::class,
     ])->toArray(),
 

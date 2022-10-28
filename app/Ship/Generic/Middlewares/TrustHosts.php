@@ -13,7 +13,7 @@ final class TrustHosts extends TrustHostsMiddleware
      *
      * @return array<int, string|null>
      */
-    public function hosts()
+    public function hosts(): array
     {
         return [
             $this->allSubdomainsOfApplicationUrl(),

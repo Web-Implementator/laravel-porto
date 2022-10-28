@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Ship\Generic\Middlewares;
 
-use App\Ship\Parents\Providers\RouteServiceProvider;
+use App\Ship\Generic\Providers\RouteServiceProvider;
 
 use Closure;
 use Request;
+use Response;
+use RedirectResponse;
 use Auth;
 
 final class RedirectIfAuthenticated
@@ -15,12 +17,12 @@ final class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @param  string|null  ...$guards
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param  Request  $request
+     * @param  Closure(Request): (Response|RedirectResponse)  $next
+     * @param  ?string  ...$guards
+     * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle(Request $request, Closure $next, ?string ...$guards): Response|RedirectResponse
     {
         $guards = empty($guards) ? [null] : $guards;
 
