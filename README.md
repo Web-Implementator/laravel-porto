@@ -18,7 +18,7 @@ App/Containers/*/Tests
 
 All migrations must be placed inside the example container
 ``` bash
-App/Containers/*/Migrations
+App/Containers/*/Data/Migrations
 ```
 
 ## Installation
