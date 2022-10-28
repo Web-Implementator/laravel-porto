@@ -29,7 +29,7 @@ final class AppServiceProvider extends ServiceProvider
         $mainPath = database_path('migrations');
 
         // Директория внутри контейнеров
-        $directories = glob(app_path() . '/Containers/*/Migrations' , GLOB_ONLYDIR);
+        $directories = glob(app_path() . '/Containers/*/Data/Migrations' , GLOB_ONLYDIR);
 
         $paths = array_merge([$mainPath], $directories);
 
