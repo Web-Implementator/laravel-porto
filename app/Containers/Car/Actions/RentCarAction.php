@@ -9,10 +9,11 @@ use App\Containers\Car\Data\Repositories\RentRepository;
 use App\Containers\Car\Data\Transporters\CarUpdateDTO;
 use App\Containers\Car\Data\Transporters\GetCarDTO;
 use App\Containers\Car\Data\Transporters\RentCarDTO;
+use App\Containers\Car\Data\Enums\CarStatusEnum;
 
 use App\Ship\Parents\Actions\Action;
-use Carbon\Carbon;
-use Exception;
+
+use Carbon\Carbon, Exception;
 
 final class RentCarAction extends Action
 {
@@ -31,7 +32,7 @@ final class RentCarAction extends Action
     {
         $car = $this->carRepository->getByID(new GetCarDTO(id: $dto->car_id));
 
-        if ($car['status'] !== 1) {
+        if ($car['status'] !== CarStatusEnum::free) {
             throw new Exception('Автомобиль уже арендуют');
         }
 
@@ -46,6 +47,6 @@ final class RentCarAction extends Action
             'begin_at' => Carbon::now()
         ]);
 
-        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status' => 2 ]));
+        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status' => CarStatusEnum::busy ]));
     }
 }
