@@ -84,6 +84,11 @@ Generation of API documentation
 php artisan l5-swagger:generate
 ```
 
+After generation go to documentation to url (localhost or your APP_URL)
+```
+http://localhost/api/documentation
+```
+
 Running Autotests
 ``` bash
 php artisan test
