@@ -14,6 +14,8 @@ final class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        UserModel::factory(10)->create();
+        if (env('APP_ENV') === 'local') {
+            UserModel::factory(10)->create();
+        }
     }
 }

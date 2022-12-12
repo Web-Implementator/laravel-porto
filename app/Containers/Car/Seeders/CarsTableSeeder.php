@@ -15,6 +15,8 @@ final class CarsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        CarModel::factory(10)->create();
+        if (env('APP_ENV') === 'local') {
+            CarModel::factory(10)->create();
+        }
     }
 }
