@@ -119,7 +119,7 @@ final class CarController extends ApiController
 
     /**
      * @OA\Post(
-     *      path="/api/v1/car/rent",
+     *      path="/api/v1/car/action/rent",
      *      operationId="carRent",
      *      tags={"Car"},
      *      summary="Аренда автомобиля",
@@ -188,7 +188,7 @@ final class CarController extends ApiController
 
     /**
      * @OA\Post(
-     *      path="/api/v1/car/unrent",
+     *      path="/api/v1/car/action/unrent",
      *      operationId="carUnRent",
      *      tags={"Car"},
      *      summary="Завершить аренду автомобиля",

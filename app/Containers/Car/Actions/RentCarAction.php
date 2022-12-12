@@ -32,7 +32,7 @@ final class RentCarAction extends Action
     {
         $car = $this->carRepository->getByID(new GetCarDTO(id: $dto->car_id));
 
-        if ($car['status'] !== CarStatusEnum::free) {
+        if ($car['status'] !== CarStatusEnum::free->value) {
             throw new Exception('Автомобиль уже арендуют');
         }
 
@@ -47,6 +47,6 @@ final class RentCarAction extends Action
             'begin_at' => Carbon::now()
         ]);
 
-        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status' => CarStatusEnum::busy ]));
+        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status' => CarStatusEnum::busy->value ]));
     }
 }

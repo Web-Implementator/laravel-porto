@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "https://my-default-host.com",
+            "url": "http://localhost",
             "description": "Demo API Server"
         }
     ],
@@ -74,7 +74,7 @@
                 }
             }
         },
-        "/api/v1/car/rent": {
+        "/api/v1/car/action/rent": {
             "post": {
                 "tags": [
                     "Car"
@@ -118,7 +118,7 @@
                 }
             }
         },
-        "/api/v1/car/unrent": {
+        "/api/v1/car/action/unrent": {
             "post": {
                 "tags": [
                     "Car"

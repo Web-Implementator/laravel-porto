@@ -33,7 +33,7 @@ final class UnRentCarAction extends Action
     {
         $car = $this->carRepository->getByID(new GetCarDTO(id: $dto->car_id));
 
-        if ($car['status'] !== CarStatusEnum::busy) {
+        if ($car['status'] !== CarStatusEnum::busy->value) {
             throw new Exception('Не возможно отменить аренду у свободного автомобиля');
         }
 
@@ -44,6 +44,6 @@ final class UnRentCarAction extends Action
 
         $this->rentRepository->update(new RentUpdateDTO(id: $rent['id'], details: [ 'end_at' => Carbon::now() ]));
 
-        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status' => CarStatusEnum::free ]));
+        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status' => CarStatusEnum::free->value ]));
     }
 }
