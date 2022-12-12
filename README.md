@@ -23,14 +23,20 @@ Basic Laravel project for architecture Porto
 - [Fractal](https://github.com/spatie/laravel-fractal?ysclid=l9lv0ltaw3330622122)
 - [Horizon](https://laravel.su/docs/8.x/horizon?ysclid=l9o0yhkvvd508817367)
 
-All tests must be placed inside the example container
+All tests must be placed inside the container
 ``` bash
 App/Containers/*/Tests
 ```
 
-All migrations must be placed inside the example container
+All migrations must be placed inside the container
 ``` bash
 App/Containers/*/Data/Migrations
+```
+
+All routes must be placed inside the container
+``` bash
+App/Containers/*/UI/API/Routes/api.php
+App/Containers/*/UI/Web/Routes/web.php
 ```
 
 ## Installation

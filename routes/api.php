@@ -1,35 +1,19 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Containers\User\UI\API\Controllers\UserController;
-use App\Containers\Car\UI\API\Controllers\CarController;
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
 
-Route::prefix('v1')
-    ->name('api-v1-')
-    ->group(function () {
-
-        // Список машин
-        Route::get('/cars', [CarController::class, 'getAll'])
-            ->name('get-cars');
-
-        // Получить пользователя
-        Route::get('/car/{id}', [CarController::class, 'getById'])
-            ->name('get-car');
-
-        // Аренда машины
-        Route::post('/car/rent', [CarController::class, 'rent'])
-            ->name('car-rent');
-
-        // Завершить аренду машины
-        Route::post('/car/unrent', [CarController::class, 'unrent'])
-            ->name('car-unrent');
-
-        // Список пользователей
-        Route::get('/users', [UserController::class, 'getAll'])
-            ->name('get-users');
-
-        // Получить пользователя
-        Route::get('/user/{id}', [UserController::class, 'getById'])
-            ->name('get-user');
-    });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});

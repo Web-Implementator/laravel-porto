@@ -23,6 +23,15 @@ final class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
+     * The controller namespace for the application.
+     *
+     * When present, controller route declarations will automatically be prefixed with this namespace.
+     *
+     * @var string|null
+     */
+    protected $namespace = 'App\\Containers';
+
+    /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
      * @return void
@@ -38,7 +47,47 @@ final class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+            $this->mapApi();
+            $this->mapWeb();
         });
+    }
+
+    /**
+     * Register Api routes for containers
+     *
+     * @return void
+     */
+    protected function mapApi(): void
+    {
+        $paths_api = glob(app_path() . '/Containers/*/UI/API/Routes/api.php');
+
+        foreach ($paths_api as $path) {
+            $container_name = explode('/', explode('Containers', $path)[1])[1];
+
+            Route::prefix('api/v1')
+                ->name('api-v1-')
+                ->namespace("$this->namespace\\$container_name\\UI\\API\\Controllers")
+                ->group($path);
+        }
+    }
+
+    /**
+     * Register Web routes for containers
+     *
+     * @return void
+     */
+    protected function mapWeb(): void
+    {
+        $paths_web = glob(app_path() . '/Containers/*/UI/Web/Routes/web.php');
+
+        foreach ($paths_web as $path) {
+            $container_name = explode('/', explode('Containers', $path)[1])[1];
+
+            Route::middleware('web')
+                ->namespace("$this->namespace\\$container_name\\UI\\Web\\Controllers")
+                ->group($path);
+        }
     }
 
     /**
