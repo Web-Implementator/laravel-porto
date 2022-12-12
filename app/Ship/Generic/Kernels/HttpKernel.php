@@ -2,6 +2,18 @@
 
 namespace App\Ship\Generic\Kernels;
 
+use App\Ship\Generic\Middlewares\{
+    Authenticate,
+    TrustProxies,
+//    TrustHosts,
+    TrimStrings,
+    PreventRequestsDuringMaintenance,
+    RedirectIfAuthenticated,
+    EncryptCookies,
+    VerifyCsrfToken,
+    ValidateSignature,
+    Language
+};
 use App\Ship\Parents\Kernels\HttpKernel as Kernel;
 
 class HttpKernel extends Kernel
@@ -14,12 +26,12 @@ class HttpKernel extends Kernel
      * @const array<int, class-string|string>
      */
     protected $middleware = [
-        // \App\Ship\Generic\Middlewares\TrustHosts::class,
-        \App\Ship\Generic\Middlewares\TrustProxies::class,
+        // TrustHosts::class,
+        TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
-        \App\Ship\Generic\Middlewares\PreventRequestsDuringMaintenance::class,
+        PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \App\Ship\Generic\Middlewares\TrimStrings::class,
+        TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
@@ -30,12 +42,13 @@ class HttpKernel extends Kernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Ship\Generic\Middlewares\EncryptCookies::class,
+            EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Ship\Generic\Middlewares\VerifyCsrfToken::class,
+            VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            Language::class,
         ],
 
         'api' => [
@@ -53,14 +66,14 @@ class HttpKernel extends Kernel
      * @const array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'auth' => \App\Ship\Generic\Middlewares\Authenticate::class,
+        'auth' => Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Ship\Generic\Middlewares\RedirectIfAuthenticated::class,
+        'guest' => RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed' => \App\Ship\Generic\Middlewares\ValidateSignature::class,
+        'signed' => ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];

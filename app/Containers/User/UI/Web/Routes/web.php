@@ -7,4 +7,4 @@
  */
 
 // Базовая страница с шаблоном внутри контейнера
-Route::get('/users-welcome-container', 'UserController@users')->name('users');
+Route::get('/users-welcome-container', 'UserController@users')->name('users-welcome-container');

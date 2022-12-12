@@ -1,0 +1,22 @@
+{
+    "Home": "Главная",
+    "Sign in": "Авторизация",
+    "Sign up": "Регистрация",
+    "English": "Английский",
+    "Russian": "Русский",
+    "Shop": "Магазин",
+    "Sponsor": "Спонсировать",
+    "architecture": "архитектура",
+    "Do you want to change the language?": "Вы действительно хотить изменить язык интерфейса?",
+    "Documentation": "Документация",
+    "Laravel has wonderful, thorough documentation covering every aspect of the framework. Whether you are new to the framework or have previous experience with Laravel, we recommend reading all of the documentation from beginning to end.": "У Laravel есть замечательная, подробная документация, охватывающая все аспекты фреймворка. Если вы новичок в фреймворке или уже имеете опыт работы с Laravel, мы рекомендуем прочитать всю документацию от начала до конца.",
+    "Laracasts": "Ларакасты",
+    "Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.": "Laracasts предлагает тысячи видеоуроков по разработке Laravel, PHP и JavaScript. Ознакомьтесь с ними, убедитесь в этом сами и значительно улучшите свои навыки разработки в процессе.",
+    "Laravel News": "Новости Laravel",
+    "Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.": "Laravel News — это управляемый сообществом портал и информационный бюллетень, на котором собраны все последние и наиболее важные новости в экосистеме Laravel, включая выпуски новых пакетов и учебные пособия.",
+    "Vibrant Ecosystem": "Яркая экосистема",
+    "Laravel`s robust library of first-party tools and libraries, such as": "Надежная библиотека Laravel с собственными инструментами и библиотеками, такими как",
+    "help you take your projects to the next level. Pair them with powerful open source libraries like": "поможет вывести ваши проекты на новый уровень. Соедините их с мощными библиотеками с открытым исходным кодом, такими как",
+    "and": "и",
+    "and more.": "и другие."
+}
