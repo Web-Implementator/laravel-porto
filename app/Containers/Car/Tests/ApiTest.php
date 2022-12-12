@@ -31,7 +31,7 @@ final class ApiTest extends TestCase
      */
     public function test_rent_car(): void
     {
-        $response = $this->post(route('api-v1-car-rent'), [
+        $response = $this->post(route('api-v1-car-action-rent'), [
             'car_id' => 1,
             'user_id' => 1,
         ]);
@@ -43,7 +43,7 @@ final class ApiTest extends TestCase
      */
     public function test_unrent_car(): void
     {
-        $response = $this->post(route('api-v1-car-unrent'), [
+        $response = $this->post(route('api-v1-car-action-unrent'), [
             'car_id' => 1,
             'user_id' => 1,
         ]);
