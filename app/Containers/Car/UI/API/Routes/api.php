@@ -1,17 +1,20 @@
 <?php
 
+/**
+ * Information for understanding
+ * 
+ * Prefix api-v1-
+ * Namespace App\Containers\Car\UI\API\Controllers
+ */
+
 // Список машин
-Route::get('/cars', [CarController::class, 'getAll'])
-    ->name('get-cars');
+Route::get('/cars', 'CarController@getAll')->name('get-cars');
 
 // Получить пользователя
-Route::get('/car/{id}', [CarController::class, 'getById'])
-    ->name('get-car');
+Route::get('/car/{id}', 'CarController@getById')->name('get-car');
 
 // Аренда машины
-Route::post('/car/rent', [CarController::class, 'rent'])
-    ->name('car-rent');
+Route::post('/car/action/rent', 'CarController@rent')->name('car-action-rent');
 
 // Завершить аренду машины
-Route::post('/car/unrent', [CarController::class, 'unrent'])
-    ->name('car-unrent');
+Route::post('/car/action/unrent', 'CarController@unrent')->name('car-action-unrent');
