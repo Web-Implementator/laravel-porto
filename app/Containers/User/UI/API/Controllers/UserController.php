@@ -8,19 +8,20 @@ use App\Containers\User\Actions\GetUserAction;
 use App\Containers\User\Actions\GetUsersAction;
 use App\Containers\User\Data\Transporters\GetUserDTO;
 use App\Containers\User\UI\API\Transformers\GetUsersTransformer;
-
 use App\Containers\User\UI\API\Transformers\GetUserTransformer;
-use App\Ship\Generic\Controllers\ApiController;
-use App\Ship\Generic\Transformers\Serializers\ArraySerializer;
+
+use App\Ship\Parents\Controllers\ApiController;
 
 use JsonResponse;
+
+use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 final class UserController extends ApiController
 {
     /**
      * @OA\Get(
-     *      path="/api/v1/users",
-     *      operationId="getUsers",
+     *      path="/api/v1/user/all",
+     *      operationId="userGetAll",
      *      tags={"User"},
      *      summary="Получить список пользователей",
      *      @OA\Response(
@@ -42,24 +43,18 @@ final class UserController extends ApiController
      */
     public function getAll(): JsonResponse
     {
-        try {
-            return new JsonResponse(
-                fractal()
-                    ->item(app(GetUsersAction::class)->run())
-                    ->transformWith(new GetUsersTransformer())
-                    ->serializeWith(new ArraySerializer())
-                    ->toArray()
-            );
-        } catch (Throwable $e) {
-            report($e);
-            return $this->responseServiceUnavailable();
-        }
+        return new JsonResponse(
+            fractal()
+                ->item(app(GetUsersAction::class)->run())
+                ->transformWith(new GetUsersTransformer())
+                ->toArray()
+        );
     }
 
     /**
      * @OA\Get(
      *      path="/api/v1/user/{id}",
-     *      operationId="getUserById",
+     *      operationId="userGetById",
      *      tags={"User"},
      *      summary="Получить пользователя по ID",
      *      @OA\Parameter(
@@ -90,20 +85,15 @@ final class UserController extends ApiController
      *  )
      * @param int $id
      * @return JsonResponse
+     * @throws UnknownProperties
      */
     public function getById(int $id): JsonResponse
     {
-        try {
-            return new JsonResponse(
-                fractal()
-                    ->item(app(GetUserAction::class)->run(new GetUserDTO(id: $id)))
-                    ->transformWith(new GetUserTransformer())
-                    ->serializeWith(new ArraySerializer())
-                    ->toArray()
-            );
-        } catch (Throwable $e) {
-            report($e);
-            return $this->responseServiceUnavailable();
-        }
+        return new JsonResponse(
+            fractal()
+                ->item(app(GetUserAction::class)->run(new GetUserDTO(id: $id)))
+                ->transformWith(new GetUserTransformer())
+                ->toArray()
+        );
     }
 }

@@ -6,15 +6,19 @@ namespace App\Containers\Language\UI\Web\Controllers;
 
 use App\Containers\Language\UI\Web\Requests\LanguageChangeRequest;
 
-use App\Ship\Generic\Controllers\WebController;
+use App\Ship\Parents\Controllers\WebController;
+
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 final class LanguageController extends WebController
 {
     /**
      * @param LanguageChangeRequest $request
-     * @return mixed
+     * @return Application|RedirectResponse|Redirector
      */
-    public function change(LanguageChangeRequest $request): mixed
+    public function change(LanguageChangeRequest $request): Application|RedirectResponse|Redirector
     {
         $validated = $request->validated();
 

@@ -3,7 +3,9 @@
 /**
  * Information for understanding
  *
- * Namespace App\Containers\Car\UI\Web\Controllers
+ * Prefix none
+ * Name none
+ * Namespace App\Containers\User\UI\API\Controllers
  */
 
 // Базовая страница с шаблоном внутри контейнера

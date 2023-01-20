@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Transporters;
 
-use Spatie\DataTransferObject\DataTransferObject;
+use App\Ship\Parents\Transporters\Data;
 
-final class GetRentDTO extends DataTransferObject
+final class GetRentDTO extends Data
 {
     /*** @var int */
     public int $id;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Containers\User\UI\Web\Controllers;
 
-use App\Ship\Generic\Controllers\WebController;
+use App\Ship\Parents\Controllers\WebController;
 
 final class UserController extends WebController
 {

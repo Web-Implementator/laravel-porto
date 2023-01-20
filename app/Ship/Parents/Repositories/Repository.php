@@ -6,4 +6,5 @@ namespace App\Ship\Parents\Repositories;
 
 abstract class Repository
 {
+
 }

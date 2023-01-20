@@ -16,6 +16,6 @@ final class GetUsersTransformer extends TransformerAbstract
     {
         return collect($response)->map(function ($item) {
             return app(GetUserTransformer::class)->transform($item);
-        })->toArray();
+        })->toArray() ?? [];
     }
 }

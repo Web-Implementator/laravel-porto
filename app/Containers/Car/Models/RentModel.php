@@ -63,17 +63,7 @@ final class RentModel extends Model
      * @param int $id
      * @return Builder
      */
-    public function scopeWhereId(Builder $query, int $id): Builder
-    {
-        return $query->where('id', $id);
-    }
-
-    /**
-     * @param Builder $query
-     * @param int $id
-     * @return Builder
-     */
-    public function scopeWhereUserId(Builder $query, int $id): Builder
+    public function scopeUserId(Builder $query, int $id): Builder
     {
         return $query->where('user_id', $id);
     }
@@ -83,7 +73,7 @@ final class RentModel extends Model
      * @param int $id
      * @return Builder
      */
-    public function scopeWhereCarId(Builder $query, int $id): Builder
+    public function scopeCarId(Builder $query, int $id): Builder
     {
         return $query->where('car_id', $id);
     }

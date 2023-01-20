@@ -18,19 +18,18 @@ use App\Containers\Car\UI\API\Transformers\CarRentTransformer;
 use App\Containers\Car\UI\API\Transformers\CarUnRentTransformer;
 use App\Containers\Car\UI\API\Transformers\GetCarTransformer;
 
-use App\Ship\Generic\Controllers\ApiController;
-use App\Ship\Generic\Transformers\Serializers\ArraySerializer;
+use App\Ship\Parents\Controllers\ApiController;
 
 use JsonResponse;
-use Throwable;
-use Exception;
+
+use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 final class CarController extends ApiController
 {
     /**
      * @OA\Get(
-     *      path="/api/v1/cars",
-     *      operationId="getCars",
+     *      path="/api/v1/car/all",
+     *      operationId="carGetAll",
      *      tags={"Car"},
      *      summary="Получение списка автомобилей",
      *      @OA\Response(
@@ -52,24 +51,18 @@ final class CarController extends ApiController
      */
     public function getAll(): JsonResponse
     {
-        try {
-            return new JsonResponse(
-                fractal()
-                    ->item(app(GetCarsAction::class)->run())
-                    ->transformWith(new GetCarsTransformer())
-                    ->serializeWith(new ArraySerializer())
-                    ->toArray()
-            );
-        } catch (Throwable $e) {
-            report($e);
-            return $this->responseServiceUnavailable();
-        }
+        return new JsonResponse(
+            fractal()
+                ->item(app(GetCarsAction::class)->run())
+                ->transformWith(new GetCarsTransformer())
+                ->toArray()
+        );
     }
 
     /**
      * @OA\Get(
      *      path="/api/v1/car/{id}",
-     *      operationId="getCarById",
+     *      operationId="carGetById",
      *      tags={"Car"},
      *      summary="Получить автомобиль по ID",
      *      @OA\Parameter(
@@ -100,27 +93,22 @@ final class CarController extends ApiController
      *  )
      * @param int $id
      * @return JsonResponse
+     * @throws UnknownProperties
      */
     public function getById(int $id): JsonResponse
     {
-        try {
-            return new JsonResponse(
-                fractal()
-                    ->item(app(GetCarAction::class)->run(new GetCarDTO(id: $id)))
-                    ->transformWith(new GetCarTransformer())
-                    ->serializeWith(new ArraySerializer())
-                    ->toArray()
-            );
-        } catch (Throwable $e) {
-            report($e);
-            return $this->responseServiceUnavailable();
-        }
+        return new JsonResponse(
+            fractal()
+                ->item(app(GetCarAction::class)->run(new GetCarDTO(id: $id)))
+                ->transformWith(new GetCarTransformer())
+                ->toArray()
+        );
     }
 
     /**
      * @OA\Post(
      *      path="/api/v1/car/action/rent",
-     *      operationId="carRent",
+     *      operationId="carActionRent",
      *      tags={"Car"},
      *      summary="Аренда автомобиля",
      *      @OA\Parameter(
@@ -160,36 +148,24 @@ final class CarController extends ApiController
      *  )
      * @param RentRequest $request
      * @return JsonResponse
+     * @throws UnknownProperties
      */
     public function rent(RentRequest $request): JsonResponse
     {
-        try {
-            $validated = $request->validated();
+        $validated = $request->validated();
 
-            return new JsonResponse(
-                fractal()
-                    ->item(app(RentCarAction::class)->run(new RentCarDTO($validated)))
-                    ->transformWith(new CarRentTransformer())
-                    ->serializeWith(new ArraySerializer())
-                    ->toArray()
-            );
-        } catch (Exception $e) {
-            return new JsonResponse([
-                'message' => [
-                    'type' => 'error',
-                    'text' => $e->getMessage()
-                ]
-            ]);
-        } catch (Throwable $e) {
-            report($e);
-            return $this->responseServiceUnavailable();
-        }
+        return new JsonResponse(
+            fractal()
+                ->item(app(RentCarAction::class)->run(new RentCarDTO($validated)))
+                ->transformWith(new CarRentTransformer())
+                ->toArray()
+        );
     }
 
     /**
      * @OA\Post(
      *      path="/api/v1/car/action/unrent",
-     *      operationId="carUnRent",
+     *      operationId="carActionUnRent",
      *      tags={"Car"},
      *      summary="Завершить аренду автомобиля",
      *      @OA\Parameter(
@@ -229,29 +205,17 @@ final class CarController extends ApiController
      *  )
      * @param UnRentRequest $request
      * @return JsonResponse
+     * @throws UnknownProperties
      */
-    public function unrent(UnRentRequest $request): JsonResponse
+    public function unRent(UnRentRequest $request): JsonResponse
     {
-        try {
-            $validated = $request->validated();
+        $validated = $request->validated();
 
-            return new JsonResponse(
-                fractal()
-                    ->item(app(UnRentCarAction::class)->run(new UnRentCarDTO($validated)))
-                    ->transformWith(new CarUnRentTransformer())
-                    ->serializeWith(new ArraySerializer())
-                    ->toArray()
-            );
-        } catch (Exception $e) {
-            return new JsonResponse([
-                'message' => [
-                    'type' => 'error',
-                    'text' => $e->getMessage()
-                ]
-            ]);
-        } catch (Throwable $e) {
-            report($e);
-            return $this->responseServiceUnavailable();
-        }
+        return new JsonResponse(
+            fractal()
+                ->item(app(UnRentCarAction::class)->run(new UnRentCarDTO($validated)))
+                ->transformWith(new CarUnRentTransformer())
+                ->toArray()
+        );
     }
 }

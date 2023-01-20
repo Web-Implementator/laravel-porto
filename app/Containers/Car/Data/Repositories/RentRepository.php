@@ -29,9 +29,9 @@ final class RentRepository extends Repository implements RentRepositoryInterface
     public function getByID(GetRentDTO $dto): array
     {
         if (!empty($dto->user_id)) {
-            return RentModel::whereUserId($dto->user_id)->findOrFail($dto->id)->toArray();
+            return RentModel::userId($dto->user_id)->findOrFail($dto->id)->toArray();
         } else if (!empty($dto->car_id)) {
-            return RentModel::whereCarId($dto->car_id)->findOrFail($dto->id)->toArray();
+            return RentModel::carId($dto->car_id)->findOrFail($dto->id)->toArray();
         } else {
             return RentModel::findOrFail($dto->id)->toArray();
         }
@@ -43,7 +43,7 @@ final class RentRepository extends Repository implements RentRepositoryInterface
      */
     public function getActiveRent(int $user_id): ?array
     {
-        $query = RentModel::active()->whereUserId($user_id)->first();
+        $query = RentModel::active()->userId($user_id)->first();
 
         if (!empty($query)) {
             return $query->toArray();

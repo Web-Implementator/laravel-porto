@@ -3,12 +3,13 @@
 /**
  * Information for understanding
  *
- * Prefix api-v1-
- * Namespace App\Containers\Car\UI\API\Controllers
+ * Prefix /api/v1/user
+ * Name api.v1.user-
+ * Namespace App\Containers\User\UI\API\Controllers
  */
 
 // Список пользователей
-Route::get('/users', 'UserController@getAll')->name('get-users');
+Route::get('/all', 'UserController@getAll')->name('getAll');
 
 // Получить пользователя
-Route::get('/user/{id}', 'UserController@getById')->name('get-user');
+Route::get('/{id}', 'UserController@getById')->name('getById');

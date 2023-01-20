@@ -36,7 +36,12 @@ final class UserRepository extends Repository implements UserRepositoryInterface
      */
     public function update(UserUpdateDTO $dto): array
     {
-        return UserModel::whereId($dto->id)->update($dto->details->toArray())->toArray();
+        $model = UserModel::findOrFail($dto->id);
+
+        $model->fill($dto->details->toArray());
+        $model->save();
+
+        return $model->toArray();
     }
 
     /**
