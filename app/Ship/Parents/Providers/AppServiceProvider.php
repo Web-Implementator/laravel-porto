@@ -34,15 +34,14 @@ final class AppServiceProvider extends ServiceProvider
      */
     protected function mapMigrations(): void
     {
-        // Базовая директория миграций
-        $mainPath = database_path('migrations');
-
-        // Директории миграций внутри контейнеров
-        $directories_migrations = glob(app_path() . '/Containers/*/Data/Migrations' , GLOB_ONLYDIR);
-
-        $paths = array_merge([$mainPath], $directories_migrations);
-
-        $this->loadMigrationsFrom($paths);
+        $this->loadMigrationsFrom(array_merge(
+            [
+                database_path('migrations') // Базовая директория миграций
+            ],
+            // Директории миграций внутри контейнеров
+            glob(app_path() . '/Containers/*/Data/Migrations', GLOB_ONLYDIR),
+            glob(app_path() . '/Containers/*/*/Data/Migrations', GLOB_ONLYDIR),
+        ));
     }
 
     /**
@@ -52,14 +51,11 @@ final class AppServiceProvider extends ServiceProvider
      */
     protected function mapViews(): void
     {
-        // Базовая директория шаблонов
-        $paths_views = config('view.paths');
-
-        // Директории шаблонов внутри контейнеров
-        $directories_template = glob(app_path() . '/Containers/*/UI/Web/Views' , GLOB_ONLYDIR);
-
-        $paths = array_merge($paths_views, $directories_template);
-
-        config(['view.paths' => $paths]);
+        config(['view.paths' => array_merge(
+            config('view.paths'), // Базовая директория шаблонов
+            // Директории шаблонов внутри контейнеров
+            glob(app_path() . '/Containers/*/UI/Web/Views', GLOB_ONLYDIR),
+            glob(app_path() . '/Containers/*/*/UI/Web/Views', GLOB_ONLYDIR),
+        )]);
     }
 }

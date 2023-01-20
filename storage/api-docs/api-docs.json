@@ -15,13 +15,13 @@
         }
     ],
     "paths": {
-        "/api/v1/cars": {
+        "/api/v1/car/all": {
             "get": {
                 "tags": [
                     "Car"
                 ],
                 "summary": "Получение списка автомобилей",
-                "operationId": "getCars",
+                "operationId": "carGetAll",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -44,7 +44,7 @@
                     "Car"
                 ],
                 "summary": "Получить автомобиль по ID",
-                "operationId": "getCarById",
+                "operationId": "carGetById",
                 "parameters": [
                     {
                         "name": "id",
@@ -80,7 +80,7 @@
                     "Car"
                 ],
                 "summary": "Аренда автомобиля",
-                "operationId": "carRent",
+                "operationId": "carActionRent",
                 "parameters": [
                     {
                         "name": "car_id",
@@ -124,7 +124,7 @@
                     "Car"
                 ],
                 "summary": "Завершить аренду автомобиля",
-                "operationId": "carUnRent",
+                "operationId": "carActionUnRent",
                 "parameters": [
                     {
                         "name": "car_id",
@@ -162,13 +162,13 @@
                 }
             }
         },
-        "/api/v1/users": {
+        "/api/v1/user/all": {
             "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Получить список пользователей",
-                "operationId": "getUsers",
+                "operationId": "userGetAll",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -191,7 +191,7 @@
                     "User"
                 ],
                 "summary": "Получить пользователя по ID",
-                "operationId": "getUserById",
+                "operationId": "userGetById",
                 "parameters": [
                     {
                         "name": "id",
