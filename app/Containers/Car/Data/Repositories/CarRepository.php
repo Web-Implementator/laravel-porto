@@ -8,33 +8,45 @@ use App\Containers\Car\Contracts\CarRepositoryInterface;
 use App\Containers\Car\Data\Transporters\CarUpdateDTO;
 use App\Containers\Car\Data\Transporters\GetCarDTO;
 use App\Containers\Car\Models\CarModel;
+use App\Containers\Car\Resources\CarResource;
 
 use App\Ship\Parents\Repositories\Repository;
+
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 final class CarRepository extends Repository implements CarRepositoryInterface
 {
     /**
-     * @return array
+     * @return AnonymousResourceCollection
      */
-    public function getAll(): array
+    public function getAll(): AnonymousResourceCollection
     {
-        return CarModel::active()->get()->toArray();
+        return CarResource::collection(CarModel::active()->get());
     }
 
     /**
      * @param GetCarDTO $dto
-     * @return array
+     * @return CarResource
      */
-    public function getByID(GetCarDTO $dto): array
+    public function getByID(GetCarDTO $dto): CarResource
     {
-        return CarModel::active()->findOrFail($dto->id)->toArray();
+        return new CarResource(CarModel::active()->findOrFail($dto->id));
+    }
+
+    /**
+     * @param array $details
+     * @return CarResource
+     */
+    public function create(array $details): CarResource
+    {
+        return new CarResource(CarModel::create($details));
     }
 
     /**
      * @param CarUpdateDTO $dto
-     * @return array
+     * @return CarResource
      */
-    public function update(CarUpdateDTO $dto): array
+    public function update(CarUpdateDTO $dto): CarResource
     {
         $model = CarModel::findOrFail($dto->id);
 
@@ -42,7 +54,7 @@ final class CarRepository extends Repository implements CarRepositoryInterface
 
         $model->save();
 
-        return $model->toArray();
+        return new CarResource($model);
     }
 
     /**
@@ -52,14 +64,5 @@ final class CarRepository extends Repository implements CarRepositoryInterface
     public function delete(int $id): void
     {
         CarModel::destroy($id);
-    }
-
-    /**
-     * @param array $details
-     * @return mixed
-     */
-    public function create(array $details): mixed
-    {
-        return CarModel::create($details);
     }
 }

@@ -15,7 +15,7 @@
         }
     ],
     "paths": {
-        "/api/v1/car/all": {
+        "/api/v1/car/getAll": {
             "get": {
                 "tags": [
                     "Car"
@@ -74,13 +74,72 @@
                 }
             }
         },
-        "/api/v1/car/action/rent": {
+        "/api/v1/car/rent/getAll": {
+            "get": {
+                "tags": [
+                    "Rent"
+                ],
+                "summary": "Получить все аренды",
+                "operationId": "carRentGetAll",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "500": {
+                        "description": "Service Unavailable",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/car/rent/{id}": {
+            "get": {
+                "tags": [
+                    "Rent"
+                ],
+                "summary": "Получить аренду по ID",
+                "operationId": "carRentGetById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID Rent",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "500": {
+                        "description": "Service Unavailable",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/car/rent/start": {
             "post": {
                 "tags": [
-                    "Car"
+                    "Rent"
                 ],
-                "summary": "Аренда автомобиля",
-                "operationId": "carActionRent",
+                "summary": "Начать аренду автомобиля",
+                "operationId": "carRentBegin",
                 "parameters": [
                     {
                         "name": "car_id",
@@ -118,13 +177,13 @@
                 }
             }
         },
-        "/api/v1/car/action/unrent": {
+        "/api/v1/car/rent/end": {
             "post": {
                 "tags": [
-                    "Car"
+                    "Rent"
                 ],
                 "summary": "Завершить аренду автомобиля",
-                "operationId": "carActionUnRent",
+                "operationId": "carRentEnd",
                 "parameters": [
                     {
                         "name": "car_id",
@@ -162,7 +221,7 @@
                 }
             }
         },
-        "/api/v1/user/all": {
+        "/api/v1/user/getAll": {
             "get": {
                 "tags": [
                     "User"

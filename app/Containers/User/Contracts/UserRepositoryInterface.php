@@ -6,35 +6,38 @@ namespace App\Containers\User\Contracts;
 
 use App\Containers\User\Data\Transporters\UserUpdateDTO;
 use App\Containers\User\Data\Transporters\GetUserDTO;
+use App\Containers\User\Resources\UserResource;
+
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 interface UserRepositoryInterface
 {
     /**
-     * @return array
+     * @return AnonymousResourceCollection
      */
-    public function getAll(): array;
+    public function getAll(): AnonymousResourceCollection;
 
     /**
      * @param GetUserDTO $dto
-     * @return array
+     * @return UserResource
      */
-    public function getById(GetUserDTO $dto): array;
+    public function getById(GetUserDTO $dto): UserResource;
+
+    /**
+     * @param array $details
+     * @return UserResource
+     */
+    public function create(array $details): UserResource;
 
     /**
      * @param UserUpdateDTO $dto
-     * @return array
+     * @return UserResource
      */
-    public function update(UserUpdateDTO $dto): array;
+    public function update(UserUpdateDTO $dto): UserResource;
 
     /**
      * @param int $id
      * @return void
      */
     public function delete(int $id): void;
-
-    /**
-     * @param array $details
-     * @return mixed
-     */
-    public function create(array $details): mixed;
 }

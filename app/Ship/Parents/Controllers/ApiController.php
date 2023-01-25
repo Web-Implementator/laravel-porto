@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Ship\Parents\Controllers;
 
-use JsonResponse;
-
 /**
  * @OA\Info(
  *      version="1.0.0",

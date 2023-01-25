@@ -23,20 +23,29 @@ Basic Laravel project for architecture Porto
 - [Fractal](https://github.com/spatie/laravel-fractal?ysclid=l9lv0ltaw3330622122)
 - [Horizon](https://laravel.su/docs/8.x/horizon?ysclid=l9o0yhkvvd508817367)
 
+All local requests to the model go through
+
+- [API Resources](https://laravel.com/docs/9.x/eloquent-resources)
+
 All tests must be placed inside the container
 ``` bash
 App/Containers/*/Tests
+App/Containers/*/*/Tests
 ```
 
 All migrations must be placed inside the container
 ``` bash
 App/Containers/*/Data/Migrations
+App/Containers/*/*/Data/Migrations
 ```
 
 All routes must be placed inside the container
 ``` bash
 App/Containers/*/UI/API/Routes/api.php
+App/Containers/*/*/UI/API/Routes/api.php
+
 App/Containers/*/UI/Web/Routes/web.php
+App/Containers/*/*/UI/Web/Routes/web.php
 ```
 
 ## Installation

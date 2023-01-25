@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Models;
 
+use App\Containers\Car\Resources\CarResource;
+use App\Containers\User\Models\UserModel;
+use App\Containers\User\Resources\UserResource;
 use App\Ship\Parents\Models\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class RentModel extends Model
 {
@@ -46,6 +51,30 @@ final class RentModel extends Model
      * @var array<string, string>
      */
     protected $casts = [];
+
+    /**
+     * @var array
+     */
+    protected $with = [
+        'car',
+        'user'
+    ];
+
+    /**
+     * @return CarResource
+     */
+    public function car(): CarResource
+    {
+        return new CarResource($this->belongsTo(CarModel::class, 'car_id', 'id'));
+    }
+
+    /**
+     * @return UserResource
+     */
+    public function user(): UserResource
+    {
+        return new UserResource($this->belongsTo(UserModel::class, 'user_id', 'id'));
+    }
 
     /**
      * Диапазон запроса, включающий только активные элементы

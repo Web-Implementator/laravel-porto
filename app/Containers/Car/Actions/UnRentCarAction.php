@@ -11,6 +11,7 @@ use App\Containers\Car\Data\Transporters\GetCarDTO;
 use App\Containers\Car\Data\Transporters\RentUpdateDTO;
 use App\Containers\Car\Data\Transporters\UnRentCarDTO;
 use App\Containers\Car\Data\Enums\CarStatusEnum;
+use App\Containers\Car\Resources\CarResource;
 
 use App\Ship\Parents\Actions\Action;
 
@@ -26,24 +27,24 @@ final class UnRentCarAction extends Action
 
     /**
      * @param UnRentCarDTO $dto
-     * @return array
+     * @return CarResource
      * @throws Exception
      */
-    public function run(UnRentCarDTO $dto): array
+    public function run(UnRentCarDTO $dto): CarResource
     {
         $car = $this->carRepository->getByID(new GetCarDTO(id: $dto->car_id));
 
-        if ($car['status'] !== CarStatusEnum::busy->value) {
+        if ($car['status_id'] !== CarStatusEnum::busy->value) {
             throw new Exception('Не возможно отменить аренду у свободного автомобиля');
         }
 
-        $rent = $this->rentRepository->getActiveRent($dto->user_id);
+        $rent = $this->rentRepository->get($dto->user_id);
         if (empty($rent)) {
             throw new Exception('У вас нет активной аренды');
         }
 
         $this->rentRepository->update(new RentUpdateDTO(id: $rent['id'], details: [ 'end_at' => Carbon::now() ]));
 
-        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status' => CarStatusEnum::free->value ]));
+        return $this->carRepository->update(new CarUpdateDTO(id: $dto->car_id, details: [ 'status_id' => CarStatusEnum::free->value ]));
     }
 }

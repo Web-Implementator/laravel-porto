@@ -6,6 +6,7 @@ namespace App\Containers\User\Actions;
 
 use App\Containers\User\Data\Repositories\UserRepository;
 use App\Containers\User\Data\Transporters\GetUserDTO;
+use App\Containers\User\Resources\UserResource;
 
 use App\Ship\Parents\Actions\Action;
 
@@ -18,9 +19,9 @@ final class GetUserAction extends Action
 
     /**
      * @param GetUserDTO $dto
-     * @return array
+     * @return UserResource
      */
-    public function run(GetUserDTO $dto): array
+    public function run(GetUserDTO $dto): UserResource
     {
         return $this->repository->getById($dto);
     }

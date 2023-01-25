@@ -12,7 +12,7 @@ use App\Containers\User\UI\API\Transformers\GetUserTransformer;
 
 use App\Ship\Parents\Controllers\ApiController;
 
-use JsonResponse;
+use Illuminate\Http\JsonResponse;
 
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
@@ -20,7 +20,7 @@ final class UserController extends ApiController
 {
     /**
      * @OA\Get(
-     *      path="/api/v1/user/all",
+     *      path="/api/v1/user/getAll",
      *      operationId="userGetAll",
      *      tags={"User"},
      *      summary="Получить список пользователей",
@@ -43,12 +43,7 @@ final class UserController extends ApiController
      */
     public function getAll(): JsonResponse
     {
-        return new JsonResponse(
-            fractal()
-                ->item(app(GetUsersAction::class)->run())
-                ->transformWith(new GetUsersTransformer())
-                ->toArray()
-        );
+        return response()->json(app(GetUsersAction::class)->run());
     }
 
     /**
@@ -89,11 +84,6 @@ final class UserController extends ApiController
      */
     public function getById(int $id): JsonResponse
     {
-        return new JsonResponse(
-            fractal()
-                ->item(app(GetUserAction::class)->run(new GetUserDTO(id: $id)))
-                ->transformWith(new GetUserTransformer())
-                ->toArray()
-        );
+        return response()->json(app(GetUserAction::class)->run(new GetUserDTO(id: $id)));
     }
 }

@@ -11,7 +11,7 @@ final class ApiTest extends PhpUnit
     /**
      * @return void
      */
-    public function test_get_users(): void
+    public function test_user_get_all(): void
     {
         $response = $this->get(route('api.v1.user.getAll'));
         $response->assertStatus(200);
@@ -20,7 +20,7 @@ final class ApiTest extends PhpUnit
     /**
      * @return void
      */
-    public function test_get_user(): void
+    public function test_user_get_by_id(): void
     {
         $response = $this->get(route('api.v1.user.getById', ['id' => 1]));
         $response->assertStatus(200);

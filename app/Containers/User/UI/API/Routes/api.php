@@ -9,7 +9,7 @@
  */
 
 // Список пользователей
-Route::get('/all', 'UserController@getAll')->name('getAll');
+Route::get('/getAll', 'UserController@getAll')->name('getAll');
 
 // Получить пользователя
-Route::get('/{id}', 'UserController@getById')->name('getById');
+Route::get('/{id}', 'UserController@getById')->name('getById')->whereNumber('id');

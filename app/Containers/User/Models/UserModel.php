@@ -61,6 +61,7 @@ final class UserModel extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_active' => 'boolean',
     ];
 
     /**
@@ -79,7 +80,7 @@ final class UserModel extends Authenticatable
      * @param int $id
      * @return Builder
      */
-    public function scopeWhereId(Builder $query, int $id): Builder
+    public function scopePrimary(Builder $query, int $id): Builder
     {
         return $query->where('id', $id);
     }

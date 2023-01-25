@@ -11,7 +11,7 @@ final class ApiTest extends PhpUnit
     /**
      * @return void
      */
-    public function test_get_cars(): void
+    public function test_car_get_all(): void
     {
         $response = $this->get(route('api.v1.car.getAll'));
         $response->assertStatus(200);
@@ -20,7 +20,7 @@ final class ApiTest extends PhpUnit
     /**
      * @return void
      */
-    public function test_get_car(): void
+    public function test_car_get_by_id(): void
     {
         $response = $this->get(route('api.v1.car.getById', ['id' => 1]));
         $response->assertStatus(200);
@@ -29,9 +29,27 @@ final class ApiTest extends PhpUnit
     /**
      * @return void
      */
-    public function test_rent_car(): void
+    public function test_rent_get_all(): void
     {
-        $response = $this->post(route('api.v1.car.action.rent'), [
+        $response = $this->get(route('api.v1.car.rent.getAll'));
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_rent_get_by_id(): void
+    {
+        $response = $this->get(route('api.v1.car.rent.getById', ['id' => 1]));
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @return void
+     */
+    public function test_car_rent_begin(): void
+    {
+        $response = $this->post(route('api.v1.car.rent.begin'), [
             'car_id' => 1,
             'user_id' => 1,
         ]);
@@ -41,9 +59,9 @@ final class ApiTest extends PhpUnit
     /**
      * @return void
      */
-    public function test_unRent_car(): void
+    public function test_car_rent_end(): void
     {
-        $response = $this->post(route('api.v1.car.action.unRent'), [
+        $response = $this->post(route('api.v1.car.rent.end'), [
             'car_id' => 1,
             'user_id' => 1,
         ]);

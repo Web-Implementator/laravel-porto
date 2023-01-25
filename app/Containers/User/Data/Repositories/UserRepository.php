@@ -9,39 +9,52 @@ use App\Containers\User\Data\Transporters\GetUserDTO;
 use App\Containers\User\Data\Transporters\UserUpdateDTO;
 use App\Containers\User\Models\UserModel;
 
+use App\Containers\User\Resources\UserResource;
 use App\Ship\Parents\Repositories\Repository;
+
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 final class UserRepository extends Repository implements UserRepositoryInterface
 {
     /**
-     * @return array
+     * @return AnonymousResourceCollection
      */
-    public function getAll(): array
+    public function getAll(): AnonymousResourceCollection
     {
-        return UserModel::active()->get()->toArray();
+        return UserResource::collection(UserModel::active()->get());
     }
+
 
     /**
      * @param GetUserDTO $dto
-     * @return array
+     * @return UserResource
      */
-    public function getById(GetUserDTO $dto): array
+    public function getById(GetUserDTO $dto): UserResource
     {
-        return UserModel::active()->findOrFail($dto->id)->toArray();
+        return new UserResource(UserModel::active()->findOrFail($dto->id));
+    }
+
+    /**
+     * @param array $details
+     * @return UserResource
+     */
+    public function create(array $details): UserResource
+    {
+        return new UserResource(UserModel::create($details));
     }
 
     /**
      * @param UserUpdateDTO $dto
-     * @return array
+     * @return UserResource
      */
-    public function update(UserUpdateDTO $dto): array
+    public function update(UserUpdateDTO $dto): UserResource
     {
         $model = UserModel::findOrFail($dto->id);
 
         $model->fill($dto->details->toArray());
         $model->save();
 
-        return $model->toArray();
+        return new UserResource($model);
     }
 
     /**
@@ -51,14 +64,5 @@ final class UserRepository extends Repository implements UserRepositoryInterface
     public function delete(int $id): void
     {
         UserModel::destroy($id);
-    }
-
-    /**
-     * @param array $details
-     * @return mixed
-     */
-    public function create(array $details): mixed
-    {
-        return UserModel::create($details);
     }
 }

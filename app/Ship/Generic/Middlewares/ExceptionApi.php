@@ -29,7 +29,7 @@ final class ExceptionApi
 
         if (!empty($exception)) {
             if ($exception instanceof ModelNotFoundException) {
-                return new JsonResponse([
+                return response([
                     'data' => [],
                     'message' => [
                         'type' => 'warning',
@@ -37,14 +37,14 @@ final class ExceptionApi
                     ]
                 ], 200);
             } else if ($exception instanceof Exception) {
-                return new JsonResponse([
+                return response([
                     'message' => [
                         'type' => 'warning',
                         'text' => $exception->getMessage()
                     ]
                 ], 500);
             } else if ($exception instanceof UnknownProperties) {
-                return new JsonResponse([
+                return response([
                     'message' => [
                         'type' => 'error',
                         'text' => $exception->getMessage()
@@ -52,8 +52,9 @@ final class ExceptionApi
                 ], 304);
             }
 
+            var_dump($exception->getMessage());
             report($exception);
-            return new JsonResponse([
+            return response([
                 'message' => [
                     'type' => 'error',
                     'text' => 'Сервис временно недоступен, пожалуйста, повторите попытку позднее'

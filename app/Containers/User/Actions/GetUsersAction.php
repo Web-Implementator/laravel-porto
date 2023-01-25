@@ -8,6 +8,8 @@ use App\Containers\User\Data\Repositories\UserRepository;
 
 use App\Ship\Parents\Actions\Action;
 
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
 final class GetUsersAction extends Action
 {
     public function __construct(
@@ -16,9 +18,9 @@ final class GetUsersAction extends Action
     }
 
     /**
-     * @return array
+     * @return AnonymousResourceCollection
      */
-    public function run(): array
+    public function run(): AnonymousResourceCollection
     {
         return $this->repository->getAll();
     }

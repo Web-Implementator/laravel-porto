@@ -6,35 +6,38 @@ namespace App\Containers\Car\Contracts;
 
 use App\Containers\Car\Data\Transporters\CarUpdateDTO;
 use App\Containers\Car\Data\Transporters\GetCarDTO;
+use App\Containers\Car\Resources\CarResource;
+
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 interface CarRepositoryInterface
 {
     /**
-     * @return array
+     * @return AnonymousResourceCollection
      */
-    public function getAll(): array;
+    public function getAll(): AnonymousResourceCollection;
 
     /**
      * @param GetCarDTO $dto
-     * @return array
+     * @return CarResource
      */
-    public function getByID(GetCarDTO $dto): array;
+    public function getByID(GetCarDTO $dto): CarResource;
+
+    /**
+     * @param array $details
+     * @return CarResource
+     */
+    public function create(array $details): CarResource;
 
     /**
      * @param CarUpdateDTO $dto
-     * @return array
+     * @return CarResource
      */
-    public function update(CarUpdateDTO $dto): array;
+    public function update(CarUpdateDTO $dto): CarResource;
 
     /**
      * @param int $id
      * @return void
      */
     public function delete(int $id): void;
-
-    /**
-     * @param array $details
-     * @return mixed
-     */
-    public function create(array $details): mixed;
 }

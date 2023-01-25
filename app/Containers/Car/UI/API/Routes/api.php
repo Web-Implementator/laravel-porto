@@ -9,17 +9,23 @@
  */
 
 // Список машин
-Route::get('/all', 'CarController@getAll')->name('getAll');
+Route::get('/getAll', 'CarController@getAll')->name('getAll');
 
 // Получить пользователя
-Route::get('/{id}', 'CarController@getById')->name('getById');
+Route::get('/{id}', 'CarController@getById')->name('getById')->whereNumber('id');
 
-Route::prefix('action')
-    ->name('action.')
+Route::prefix('rent')
+    ->name('rent.')
     ->group(function () {
-        // Аренда машины
-        Route::post('/rent', 'CarController@rent')->name('rent');
+        // Список аренд
+        Route::get('/getAll', 'RentController@getAll')->name('getAll');
+
+        // Получить аренду
+        Route::get('/{id}', 'RentController@getById')->name('getById')->whereNumber('id');
+
+        // Начать аренду машины
+        Route::post('/start', 'RentController@begin')->name('begin');
 
         // Завершить аренду машины
-        Route::post('/unRent', 'CarController@unRent')->name('unRent');
+        Route::post('/end', 'RentController@end')->name('end');
     });

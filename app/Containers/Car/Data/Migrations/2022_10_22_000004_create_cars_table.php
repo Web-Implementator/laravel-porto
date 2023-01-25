@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('brand');
             $table->string('model');
             $table->string('state_number');
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status_id')->default(1);
             $table->timestamps();
         });
     }

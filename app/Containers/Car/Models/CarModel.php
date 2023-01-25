@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Models;
 
+use App\Containers\Car\Data\Enums\CarStatusEnum;
+use App\Containers\Car\Data\Enums\CarStatusNameEnum;
 use App\Ship\Parents\Models\Model;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 final class CarModel extends Model
 {
@@ -39,7 +42,7 @@ final class CarModel extends Model
         'brand',
         'model',
         'state_number',
-        'status',
+        'status_id',
     ];
 
     /**
@@ -54,7 +57,14 @@ final class CarModel extends Model
      *
      * @var array<string, string>
      */
-    protected $casts = [];
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
+    /**
+     * @var array
+     */
+    protected $with = [];
 
     /**
      * Диапазон запроса, включающий только активные элементы
@@ -72,8 +82,20 @@ final class CarModel extends Model
      * @param int $id
      * @return Builder
      */
-    public function scopeWhereId(Builder $query, int $id): Builder
+    public function scopePrimary(Builder $query, int $id): Builder
     {
         return $query->where('id', $id);
+    }
+
+    /**
+     * @return Attribute
+     */
+    public function statusText(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return CarStatusNameEnum::fromName(CarStatusEnum::from($this->status_id)->name);
+            }
+        );
     }
 }
