@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace App\Ship\Parents\Kernels;
 
-use App\Ship\Parents\Middlewares\{Authenticate,
+use App\Ship\Generic\Middlewares\{
     ExceptionApi,
-    TrustProxies,
-    TrimStrings,
+    Language,
+};
+
+use App\Ship\Parents\Middlewares\{
+    Authenticate,
+    EncryptCookies,
     PreventRequestsDuringMaintenance,
     RedirectIfAuthenticated,
-    EncryptCookies,
-    VerifyCsrfToken,
+    TrimStrings,
+    TrustProxies,
     ValidateSignature,
-    Language,
+    VerifyCsrfToken,
 };
 
 use Illuminate\Foundation\Http\Kernel;

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Ship\Parents\Middlewares;
+namespace App\Ship\Generic\Middlewares;
 
-use Illuminate\Http\Request;
 use App,
     Closure,
     Session;
+
+use Illuminate\Http\Request;
 
 final class Language
 {

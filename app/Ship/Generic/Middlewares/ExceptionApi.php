@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Ship\Parents\Middlewares;
+namespace App\Ship\Generic\Middlewares;
+
+use App,
+    Closure,
+    Exception,
+    JsonResponse;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 use Illuminate\Http\Request;
 
-use App,Closure, Exception, JsonResponse, Str;
+use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 final class ExceptionApi
 {
