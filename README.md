@@ -84,6 +84,11 @@ Database creation
 php artisan migrate
 ```
 
+Gathering the front
+``` bash
+npm i && npm run build
+```
+
 ### Additional features
 
 Fake data generation
