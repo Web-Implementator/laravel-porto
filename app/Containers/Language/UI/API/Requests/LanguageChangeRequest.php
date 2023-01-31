@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Containers\Language\UI\Web\Requests;
+namespace App\Containers\Language\UI\API\Requests;
 
-use App\Ship\Parents\Requests\RequestWeb;
+use App\Ship\Parents\Requests\RequestApi;
 
-final class LanguageChangeRequest extends RequestWeb
+final class LanguageChangeRequest extends RequestApi
 {
     /**
      * @return string[]

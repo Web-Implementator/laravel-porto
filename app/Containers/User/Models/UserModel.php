@@ -77,6 +77,16 @@ final class UserModel extends Authenticatable
 
     /**
      * @param Builder $query
+     * @param string $value
+     * @return Builder
+     */
+    public function scopeEmail(Builder $query, string $value): Builder
+    {
+        return $query->where('email', $value);
+    }
+
+    /**
+     * @param Builder $query
      * @param int $id
      * @return Builder
      */

@@ -13,5 +13,8 @@ final class VerifyCsrfToken extends IlluminateVerifyCsrfToken
      *
      * @const array<int, string>
      */
-    protected $except = [];
+    protected $except = [
+        '/api/v1/user/login', // Commented in Prod
+        '/api/v1/user/register', // Commented in Prod
+    ];
 }

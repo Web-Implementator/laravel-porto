@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect(route('users-welcome-container'));
-});
+Route::get('{any}', function () {
+    return view('layouts.app');
+})->where('any', '.*');

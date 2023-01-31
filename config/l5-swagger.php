@@ -156,8 +156,13 @@ return [
                 /*
                  * Examples of Security schemes
                 */
-                /*
-                'api_key_security_example' => [ // Unique name of security
+                'sanctum' => [
+                    'type' => 'http',
+                    'description' => 'Laravel Sanctum token authentication',
+                    'scheme' => 'bearer',
+                    'bearerFormat' => 'JWT'
+                ],
+                /*'api_key_security_example' => [ // Unique name of security
                     'type' => 'apiKey', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'A short description for security scheme',
                     'name' => 'api_key', // The name of the header or query parameter to be used.

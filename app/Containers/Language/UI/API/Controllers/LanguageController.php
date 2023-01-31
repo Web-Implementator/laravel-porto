@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Containers\Language\UI\Web\Controllers;
+namespace App\Containers\Language\UI\API\Controllers;
 
-use App\Containers\Language\UI\Web\Requests\LanguageChangeRequest;
-
-use App\Ship\Parents\Controllers\WebController;
-
+use App\Containers\Language\UI\API\Requests\LanguageChangeRequest;
+use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 
-final class LanguageController extends WebController
+final class LanguageController extends ApiController
 {
     /**
      * @param LanguageChangeRequest $request

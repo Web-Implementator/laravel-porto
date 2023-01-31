@@ -8,8 +8,16 @@
  * Namespace App\Containers\User\UI\API\Controllers
  */
 
-// Список пользователей
-Route::get('/getAll', 'UserController@getAll')->name('getAll');
+Route::post('/login', 'UserController@login');
+Route::post('/register', 'UserController@register');
 
-// Получить пользователя
-Route::get('/{id}', 'UserController@getById')->name('getById')->whereNumber('id');
+Route::middleware('auth:sanctum')->group(function () {
+    // Список пользователей
+    Route::get('/getAll', 'UserController@getAll')->name('getAll');
+
+    // Получить пользователя
+    Route::get('/{id}', 'UserController@getById')->name('getById')->whereNumber('id');
+
+    // Выход
+    Route::post('/logout', 'UserController@logout');
+});

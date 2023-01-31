@@ -8,6 +8,9 @@ use App\Ship\Parents\Transporters\Data;
 
 final class GetUserDTO extends Data
 {
-    /*** @var int */
-    public int $id;
+    /*** @var ?int */
+    public ?int $id;
+
+    /*** @var ?string */
+    public ?string $email;
 }

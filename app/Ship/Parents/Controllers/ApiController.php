@@ -17,6 +17,11 @@ namespace App\Ship\Parents\Controllers;
  *      url=L5_SWAGGER_CONST_HOST,
  *      description="Demo API Server"
  * )
+ * @OAS\SecurityScheme(
+ *      securityScheme="bearer_token",
+ *      type="http",
+ *      scheme="bearer"
+ * )
  */
 abstract class ApiController extends Controller
 {

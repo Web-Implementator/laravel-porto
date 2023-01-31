@@ -15,11 +15,20 @@ public/hot
 public_html/storage
 public_html/hot
 
+# Hidden kyes
 storage/*.key
-.env
+
 Homestead.yaml
 Homestead.json
-/.vagrant
+.env
+.vagrant
 .phpunit.result.cache
 .idea
 .DS_Store
+.cache
+.npm
+.config
+.local
+
+/docker
+docker-compose.yml
