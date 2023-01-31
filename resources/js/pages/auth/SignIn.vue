@@ -83,7 +83,7 @@
                 })
                     .then(response => {
                       if (response.data.access_token) {
-                        this.$router.push({ name: 'login' })
+                          window.location.replace('/')
                       } else {
                         this.error = response.data.message.text
                       }

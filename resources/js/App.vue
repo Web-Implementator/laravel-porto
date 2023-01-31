@@ -4,7 +4,7 @@
       <div class="container">
         <router-link :to="{name: 'about'}" class="navbar-brand">Описание</router-link>
 
-        <router-link v-if="isAuth === true" :to="{name: 'dashboard'}" class="navbar-brand">Панель</router-link>
+        <router-link v-if="isAuth === true" :to="{name: 'dashboard'}" class="navbar-brand">Профиль</router-link>
         <router-link v-if="isAuth === true" :to="{name: 'user.getAll'}" class="navbar-brand">Список пользователей</router-link>
 
         <router-link v-if="isAuth === false" :to="{name: 'signIn'}" class="navbar-brand">Авторизация</router-link>
