@@ -6,7 +6,7 @@
                     <div class="card-header">Описание</div>
 
                     <div class="card-body">
-                        Добро пожаловать, {{ name }}
+                        Добро пожаловать, {{ user.name }}
                         <br>
 
                         <a class="btn btn-warning" href="/user/getAll">
@@ -34,7 +34,7 @@
         },
         data() {
             return {
-                name: null,
+                user: null,
             }
         },
         methods: {
@@ -47,7 +47,7 @@
                     })
                         .then(response => {
                             if (response.status === 200) {
-                                this.$router.go('/login')
+                                this.$router.push({ name: 'login' })
                             } else {
                                 this.error = response.data.message
                             }
@@ -71,7 +71,7 @@
         },
         created() {
             if (window.Laravel.user) {
-                this.name = window.Laravel.user.name
+                this.user = window.Laravel.user
             }
         },
         beforeRouteEnter(to, from, next) {

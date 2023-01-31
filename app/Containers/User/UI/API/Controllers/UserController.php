@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace App\Containers\User\UI\API\Controllers;
 
+use App\Containers\User\Actions\UserCreateAction;
+use App\Containers\User\Actions\UserDeleteAction;
 use App\Containers\User\Actions\UserLoginAction;
 use App\Containers\User\Actions\UserLogoutAction;
 use App\Containers\User\Actions\UserRegisterAction;
+use App\Containers\User\Actions\UserUpdateAction;
+use App\Containers\User\Data\Transporters\UserCreateDTO;
 use App\Containers\User\Data\Transporters\UserLoginDTO;
 use App\Containers\User\Data\Transporters\UserRegisterDTO;
+use App\Containers\User\Data\Transporters\UserUpdateDTO;
+use App\Containers\User\UI\API\Requests\UserCreateRequest;
+use App\Containers\User\UI\API\Requests\UserEditRequest;
 use App\Containers\User\UI\API\Requests\UserLoginRequest;
 use App\Containers\User\Actions\GetUserAction;
 use App\Containers\User\Actions\GetUsersAction;
@@ -95,114 +102,36 @@ final class UserController extends ApiController
     }
 
     /**
-     * @OA\Post(
-     *      path="/api/v1/user/login",
-     *      operationId="userLogin",
-     *      tags={"Auth"},
-     *      summary="Авторизация",
-     *      @OA\Parameter(
-     *          in="query",
-     *          name="email",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string",
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          in="query",
-     *          name="password",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string",
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=500,
-     *          description="Service Unavailable",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *          )
-     *      ),
-     *  )
-     * @param UserLoginRequest $request
-     * @return JsonResponse
-     * @throws \Exception
-     */
-    public function login(UserLoginRequest $request): JsonResponse
-    {
-        $validated = $request->validated();
-
-        return response()->json(app(UserLoginAction::class)->run(new UserLoginDTO($validated)));
-    }
-
-    /**
-     * @OA\Post(
-     *      path="/api/v1/user/register",
-     *      operationId="userRegister",
-     *      tags={"Auth"},
-     *      summary="Регистрация",
-     *      @OA\Parameter(
-     *          in="query",
-     *          name="name",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string",
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          in="query",
-     *          name="email",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string",
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          in="query",
-     *          name="password",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="string",
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=500,
-     *          description="Service Unavailable",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *          )
-     *      ),
-     *  )
-     * @param UserRegisterRequest $request
+     * @param UserCreateRequest $request
      * @return JsonResponse
      * @throws UnknownProperties
      */
-    public function register(UserRegisterRequest $request): JsonResponse
+    public function create(UserCreateRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
-        return response()->json(app(UserRegisterAction::class)->run(new UserRegisterDTO($validated)));
+        return response()->json(app(UserCreateAction::class)->run(new UserCreateDTO($validated)));
     }
 
     /**
+     * @param UserEditRequest $request
+     * @param int $id
+     * @return JsonResponse
+     * @throws UnknownProperties
+     */
+    public function edit(UserEditRequest $request, int $id): JsonResponse
+    {
+        $validated = $request->validated();
+
+        return response()->json(app(UserUpdateAction::class)->run(new UserUpdateDTO(id: $id, details: $validated)));
+    }
+
+    /**
+     * @param int $id
      * @return JsonResponse
      */
-    public function logout(): JsonResponse
+    public function delete(int $id): JsonResponse
     {
-        return response()->json(app(UserLogoutAction::class)->run());
+        return response()->json(app(UserDeleteAction::class)->run($id));
     }
 }

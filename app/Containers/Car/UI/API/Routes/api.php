@@ -4,7 +4,7 @@
  * Information for understanding
  *
  * Prefix /api/v1/car
- * Name api.v1.car-
+ * Name api.v1.car.
  * Namespace App\Containers\Car\UI\API\Controllers
  */
 

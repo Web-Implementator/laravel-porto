@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Containers\User\Models>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Containers\Car\Models>
  */
 final class CarModelFactory extends Factory
 {

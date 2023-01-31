@@ -86,14 +86,14 @@
                     .then(response => {
                         const { data } = response
                       if (data.id) {
-                        window.location.href = "/signIn"
+                        this.$router.push({ name: 'signIn' })
                       } else {
                         this.error = data.message.text
                       }
                     })
-                    .catch(e => {
-                        console.error(e)
-                        this.error = e.response.data.message.text
+                    .catch(err => {
+                        console.error(err)
+                        this.error = err.response.data.message.text
                     })
                     .finally(() => {
                         this.preloaderHide()

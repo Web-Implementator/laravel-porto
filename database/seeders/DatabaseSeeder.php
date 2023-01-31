@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Containers\Car\Seeders\CarsTableSeeder;
 use App\Containers\User\Seeders\UsersTableSeeder;
-
+use App\Containers\Car\Seeders\CarsTableSeeder;
+use App\Containers\Payment\Seeders\PaymentsTableSeeder;
 use Illuminate\Database\Seeder;
 
 final class DatabaseSeeder extends Seeder
@@ -19,6 +19,7 @@ final class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             CarsTableSeeder::class,
+            PaymentsTableSeeder::class
         ]);
     }
 }

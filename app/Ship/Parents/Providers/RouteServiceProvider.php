@@ -47,15 +47,16 @@ final class RouteServiceProvider extends IlluminateRouteServiceProvider
         Route::pattern('id', '[0-9]+');
 
         $this->routes(function () {
+            $this->mapApi();
+
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
+            $this->mapWeb();
+
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-
-            $this->mapApi();
-            $this->mapWeb();
         });
     }
 

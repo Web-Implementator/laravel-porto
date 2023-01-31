@@ -83,14 +83,14 @@
                 })
                     .then(response => {
                       if (response.data.access_token) {
-                        this.$router.go('/login')
+                        this.$router.push({ name: 'login' })
                       } else {
                         this.error = response.data.message.text
                       }
                     })
-                    .catch(e => {
-                        console.error(e)
-                        this.error = e.response.data.message.text
+                    .catch(err => {
+                        console.error(err)
+                        this.error = err.response.data.message.text
                     })
                     .finally(() => {
                         this.preloaderHide()

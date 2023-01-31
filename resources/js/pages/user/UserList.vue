@@ -3,23 +3,28 @@
         <div class="row justify-content-center">
             <h2 class="text-center">Users List</h2>
 
+            <div class="col-12 text-end">
+                <router-link :to="{name: 'user.create'}" class="btn btn-info">Создание пользователя</router-link>
+            </div>
+
             <table class="table">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th class="col-2">ID</th>
+                    <th class="col-4">Name</th>
+                    <th class="col-4">Email</th>
+                    <th class="col-2 text-end">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="user in users" :key="user.id">
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
+                    <td class="col-2">{{ user.id }}</td>
+                    <td class="col-4">{{ user.name }}</td>
+                    <td class="col-4">{{ user.email }}</td>
+                    <td class="col-2 text-end">
                         <div class="btn-group" role="group">
-                            <router-link :to="{name: 'edit', params: { id: user.id }}" class="btn btn-success">Edit</router-link>
-                            <button class="btn btn-danger" @click="deleteProduct(user.id)">Delete</button>
+                            <router-link :to="{name: 'user.edit', params: { id: user.id }}" class="btn btn-success">Редактировать</router-link>
+                            <button class="btn btn-danger" @click="deleteProduct(user.id)">Удалить</button>
                         </div>
                     </td>
                 </tr>
@@ -37,27 +42,24 @@ export default {
         }
     },
     created() {
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios
-                .get('/api/v1/user/getAll')
-                .then(response => {
-                    console.log(response)
-                    this.users = response.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        });
+        this.$axios
+            .get('/api/v1/user/getAll')
+            .then(response => {
+                this.users = response.data
+            })
+            .catch(err => {
+                console.log(err)
+            })
     },
     methods: {
         deleteProduct(id) {
             this.$axios
                 .delete(`/api/v1/user/${id}`)
                 .then(response => {
-                    let i = this.users.map(data => data.id).indexOf(id);
+                    let i = this.users.map(data => data.id).indexOf(id)
                     this.users.splice(i, 1)
-                });
-        }
+                })
+        },
     }
 }
 </script>

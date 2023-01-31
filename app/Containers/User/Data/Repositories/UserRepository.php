@@ -68,7 +68,7 @@ final class UserRepository extends Repository implements UserRepositoryInterface
     {
         $model = UserModel::findOrFail($dto->id);
 
-        $model->fill($dto->details->toArray());
+        $model->fill($dto->details);
         $model->save();
 
         return new UserResource($model);

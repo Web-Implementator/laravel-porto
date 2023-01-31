@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Containers\Car\Data\Enums;
+namespace App\Containers\Payment\Data\Enums;
 
-enum CarStatusNameEnum: string
+enum PaymentStatusNameEnum: string
 {
-    /**
-     * Свободен
-     */
-    case free = 'Свободен';
-
-    /**
-     * Занят
-     */
-    case busy = 'Занят';
+    case new = 'Новый';
+    case processing = 'В процессе оплаты';
+    case completed = 'Оплачен';
+    case failed = 'Ошибка';
+    case canceled = 'Отменён';
 
     /**
      * @param string $name
