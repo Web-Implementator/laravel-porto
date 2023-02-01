@@ -37,7 +37,7 @@ interface UserRepositoryInterface
 
     /**
      * @param int $id
-     * @return void
+     * @return bool
      */
-    public function delete(int $id): void;
+    public function delete(int $id): bool;
 }

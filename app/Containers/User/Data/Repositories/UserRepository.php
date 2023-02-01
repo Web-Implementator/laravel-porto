@@ -76,10 +76,12 @@ final class UserRepository extends Repository implements UserRepositoryInterface
 
     /**
      * @param int $id
-     * @return void
+     * @return bool
      */
-    public function delete(int $id): void
+    public function delete(int $id): bool
     {
         UserModel::destroy($id);
+
+        return true;
     }
 }

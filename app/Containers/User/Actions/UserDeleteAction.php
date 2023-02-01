@@ -19,9 +19,9 @@ final class UserDeleteAction extends Action
 
     /**
      * @param int $id
-     * @return UserResource
+     * @return bool
      */
-    public function run(int $id): UserResource
+    public function run(int $id): bool
     {
         return $this->repository->delete($id);
     }
