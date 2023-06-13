@@ -17,7 +17,7 @@ final class Authenticate extends IlluminateAuthenticate
      */
     protected function redirectTo($request): ?string
     {
-        if (! $request->expectsJson()) {
+        if (!$request->expectsJson()) {
             return route('auth');
         }
     }

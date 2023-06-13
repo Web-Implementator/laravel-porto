@@ -14,8 +14,7 @@ final class UnRentRequest extends RequestApi
     public function rules(): array
     {
         return [
-            'car_id' => 'required|int',
-            'user_id' => 'required|int',
+            'userId' => 'required|int',
         ];
     }
 }

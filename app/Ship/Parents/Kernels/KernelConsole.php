@@ -7,7 +7,7 @@ namespace App\Ship\Parents\Kernels;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel;
 
-class KernelConsole extends Kernel
+final class KernelConsole extends Kernel
 {
     /**
      * Define the application's command schedule.

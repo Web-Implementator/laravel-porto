@@ -8,9 +8,17 @@ use App\Ship\Parents\Transporters\Data;
 
 final class RentUpdateDTO extends Data
 {
-    /*** @var int */
-    public int $id;
+    public function __construct(
+        public int $rentId,
+        public array $data,
+    ) {
+    }
 
-    /*** @var array */
-    public array $details;
+    /**
+     * @return int
+     */
+    public function getPrimaryId(): int
+    {
+        return $this->rentId;
+    }
 }

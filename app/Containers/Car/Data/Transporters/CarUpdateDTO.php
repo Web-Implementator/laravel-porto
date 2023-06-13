@@ -8,9 +8,17 @@ use App\Ship\Parents\Transporters\Data;
 
 final class CarUpdateDTO extends Data
 {
-    /*** @var int */
-    public int $id;
+    public function __construct(
+        public int $carId,
+        public array $data,
+    ) {
+    }
 
-    /*** @var array */
-    public array $details;
+    /**
+     * @return int
+     */
+    public function getPrimaryId(): int
+    {
+        return $this->carId;
+    }
 }

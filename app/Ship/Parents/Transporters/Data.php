@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Ship\Parents\Transporters;
 
-use Spatie\DataTransferObject\DataTransferObject;
+use App\Ship\Parents\Contracts\DataInterface;
+use Spatie\LaravelData\Data as SpatieData;
 
-abstract class Data extends DataTransferObject
+abstract class Data extends SpatieData implements DataInterface
 {
 
 }

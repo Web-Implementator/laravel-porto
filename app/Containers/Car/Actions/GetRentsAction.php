@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Containers\Car\Actions;
 
 use App\Containers\Car\Data\Repositories\RentRepository;
+use App\Containers\Car\Resources\RentCollection;
 use App\Ship\Parents\Actions\Action;
-
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 final class GetRentsAction extends Action
 {
@@ -17,9 +16,9 @@ final class GetRentsAction extends Action
     }
 
     /**
-     * @return AnonymousResourceCollection
+     * @return RentCollection
      */
-    public function run(): AnonymousResourceCollection
+    public function run(): RentCollection
     {
         return $this->repository->getAll();
     }

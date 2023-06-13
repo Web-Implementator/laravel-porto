@@ -4,50 +4,50 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Repositories;
 
-use App\Containers\Car\Contracts\RentRepositoryInterface;
-use App\Containers\Car\Data\Transporters\RentUpdateDTO;
-use App\Containers\Car\Data\Transporters\GetRentDTO;
 use App\Containers\Car\Models\RentModel;
+use App\Containers\Car\Resources\RentCollection;
 use App\Containers\Car\Resources\RentResource;
-
 use App\Ship\Parents\Repositories\Repository;
 
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-
-final class RentRepository extends Repository implements RentRepositoryInterface
+final class RentRepository extends Repository
 {
     /**
-     * @return AnonymousResourceCollection
+     * @return RentCollection
      */
-    public function getAll(): AnonymousResourceCollection
+    public function getAll(): RentCollection
     {
-        return RentResource::collection(RentModel::get());
+        return new RentCollection(RentModel::get());
     }
 
     /**
-     * @param GetRentDTO $dto
+     * @param int|string $id
      * @return RentResource
      */
-    public function getByID(GetRentDTO $dto): RentResource
+    public function getByID(int|string $id): RentResource
     {
-        $id = $dto->id;
+        return new RentResource(RentModel::findOrFail($id));
+    }
 
-        if (!empty($dto->user_id)) {
-            $query = RentModel::userId($dto->user_id)->findOrFail($id);
-        } else if (!empty($dto->car_id)) {
-            $query = RentModel::carId($dto->car_id)->findOrFail($id);
-        } else {
-            $query = RentModel::findOrFail($id);
+    /**
+     * @param int $car_id
+     * @return RentResource|null
+     */
+    public function getByCarId(int $car_id): ?RentResource
+    {
+        $query = RentModel::active()->carId($car_id)->first();
+
+        if (!empty($query)) {
+            return new RentResource($query);
         }
 
-        return new RentResource($query);
+        return null;
     }
 
     /**
      * @param int $user_id
      * @return ?RentResource
      */
-    public function get(int $user_id): ?RentResource
+    public function getByUserId(int $user_id): ?RentResource
     {
         $query = RentModel::active()->userId($user_id)->first();
 
@@ -59,23 +59,24 @@ final class RentRepository extends Repository implements RentRepositoryInterface
     }
 
     /**
-     * @param array $details
+     * @param array $data
      * @return RentResource
      */
-    public function create(array $details): RentResource
+    public function create(array $data): RentResource
     {
-        return new RentResource(RentModel::create($details));
+        return new RentResource(RentModel::create($data));
     }
 
     /**
-     * @param RentUpdateDTO $dto
+     * @param int|string $id
+     * @param array $data
      * @return RentResource
      */
-    public function update(RentUpdateDTO $dto): RentResource
+    public function update(int|string $id, array $data): RentResource
     {
-        $model = RentModel::findOrFail($dto->id);
+        $model = RentModel::findOrFail($id);
 
-        $model->fill($dto->details);
+        $model->fill($data);
 
         $model->save();
 
@@ -83,10 +84,10 @@ final class RentRepository extends Repository implements RentRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int|string $id
      * @return void
      */
-    public function delete(int $id): void
+    public function delete(int|string $id): void
     {
         RentModel::destroy($id);
     }

@@ -4,53 +4,49 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Repositories;
 
-use App\Containers\Car\Contracts\CarRepositoryInterface;
-use App\Containers\Car\Data\Transporters\CarUpdateDTO;
-use App\Containers\Car\Data\Transporters\GetCarDTO;
 use App\Containers\Car\Models\CarModel;
+use App\Containers\Car\Resources\CarCollection;
 use App\Containers\Car\Resources\CarResource;
-
 use App\Ship\Parents\Repositories\Repository;
 
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-
-final class CarRepository extends Repository implements CarRepositoryInterface
+final class CarRepository extends Repository
 {
     /**
-     * @return AnonymousResourceCollection
+     * @return CarCollection
      */
-    public function getAll(): AnonymousResourceCollection
+    public function getAll(): CarCollection
     {
-        return CarResource::collection(CarModel::active()->get());
+        return new CarCollection(CarModel::active()->get());
     }
 
     /**
-     * @param GetCarDTO $dto
+     * @param int|string $id
      * @return CarResource
      */
-    public function getByID(GetCarDTO $dto): CarResource
+    public function getByID(int|string $id): CarResource
     {
-        return new CarResource(CarModel::active()->findOrFail($dto->id));
+        return new CarResource(CarModel::active()->findOrFail($id));
     }
 
     /**
-     * @param array $details
+     * @param array $data
      * @return CarResource
      */
-    public function create(array $details): CarResource
+    public function create(array $data): CarResource
     {
-        return new CarResource(CarModel::create($details));
+        return new CarResource(CarModel::create($data));
     }
 
     /**
-     * @param CarUpdateDTO $dto
+     * @param int|string $id
+     * @param array $data
      * @return CarResource
      */
-    public function update(CarUpdateDTO $dto): CarResource
+    public function update(int|string $id, array $data): CarResource
     {
-        $model = CarModel::findOrFail($dto->id);
+        $model = CarModel::findOrFail($id);
 
-        $model->fill($dto->details);
+        $model->fill($data);
 
         $model->save();
 
@@ -58,10 +54,10 @@ final class CarRepository extends Repository implements CarRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param int|string $id
      * @return void
      */
-    public function delete(int $id): void
+    public function delete(int|string $id): void
     {
         CarModel::destroy($id);
     }

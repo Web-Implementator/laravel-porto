@@ -8,9 +8,17 @@ use App\Ship\Parents\Transporters\Data;
 
 final class UserUpdateDTO extends Data
 {
-    /*** @var int */
-    public int $id;
+    public function __construct(
+        protected int $id,
+        protected array $data,
+    ) {
+    }
 
-    /*** @var array */
-    public array $details;
+    /**
+     * @return int
+     */
+    public function getPrimaryId(): int
+    {
+        return $this->id;
+    }
 }

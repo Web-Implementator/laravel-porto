@@ -133,7 +133,7 @@
                 }
             }
         },
-        "/api/v1/car/rent/start": {
+        "/api/v1/car/rent/begin": {
             "post": {
                 "tags": [
                     "Rent"
@@ -142,7 +142,7 @@
                 "operationId": "carRentBegin",
                 "parameters": [
                     {
-                        "name": "car_id",
+                        "name": "carId",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -150,7 +150,7 @@
                         }
                     },
                     {
-                        "name": "user_id",
+                        "name": "userId",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -186,15 +186,7 @@
                 "operationId": "carRentEnd",
                 "parameters": [
                     {
-                        "name": "car_id",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "user_id",
+                        "name": "userId",
                         "in": "query",
                         "required": true,
                         "schema": {

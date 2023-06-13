@@ -7,12 +7,8 @@ namespace App\Containers\Car\UI\API\Controllers;
 use App\Containers\Car\Actions\GetCarAction;
 use App\Containers\Car\Actions\GetCarsAction;
 use App\Containers\Car\Data\Transporters\GetCarDTO;
-
 use App\Ship\Parents\Controllers\ApiController;
-
 use Illuminate\Http\JsonResponse;
-
-use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 final class CarController extends ApiController
 {
@@ -41,7 +37,7 @@ final class CarController extends ApiController
      */
     public function getAll(): JsonResponse
     {
-        return response()->json(app(GetCarsAction::class)->run());
+        return $this->response($this->action(GetCarsAction::class));
     }
 
     /**
@@ -78,10 +74,11 @@ final class CarController extends ApiController
      *  )
      * @param int $id
      * @return JsonResponse
-     * @throws UnknownProperties
      */
     public function getById(int $id): JsonResponse
     {
-        return response()->json(app(GetCarAction::class)->run(new GetCarDTO(id: $id)));
+        $response['data'] = $this->action(GetCarAction::class, GetCarDTO::from(['carId' => $id]));
+
+        return $this->response($response);
     }
 }

@@ -16,7 +16,7 @@ Additional requirements:
 
 Basic Laravel project for architecture Porto
 
-- [Laravel 9.3](https://github.com/laravel/laravel?ysclid=l9luwglcyd378360370)
+- [Laravel 10](https://github.com/laravel/laravel?ysclid=l9luwglcyd378360370)
 - [Porto architecture](https://github.com/Mahmoudz/Porto)
 - [Swagger](https://github.com/DarkaOnLine/L5-Swagger?ysclid=l9lv0y79lt190343942)
 - [Data Transfer Object](https://github.com/spatie/data-transfer-object?ysclid=l9lv0a72yl154342806)
@@ -58,39 +58,29 @@ git clone https://github.com/Web-Implementator/laravel-porto.git
 Copy and edit config .env file
 ``` bash
 cd ./laravel-porto
-cp .env.example .env
+make project-install
 ```
 
-Install composer dependencies
+Database migration
 ``` bash
-composer install
-```
-
-Generate App key
-``` bash
-php artisan key:generate
-```
-
-Database creation
-``` bash
-php artisan migrate
+make migrate
 ```
 
 ### Additional features
 
 Fake data generation
 ``` bash
-php artisan db:seed
+make seed
 ```
 
 Start Horizon
 ``` bash
-php artisan horizon
+make horizon
 ```
 
 Generation of API documentation
 ``` bash
-php artisan l5-swagger:generate
+make api-docs
 ```
 
 After generation go to documentation to url (localhost or your APP_URL)

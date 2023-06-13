@@ -7,14 +7,10 @@ namespace App\Containers\User\UI\API\Controllers;
 use App\Containers\User\Actions\GetUserAction;
 use App\Containers\User\Actions\GetUsersAction;
 use App\Containers\User\Data\Transporters\GetUserDTO;
-use App\Containers\User\UI\API\Transformers\GetUsersTransformer;
-use App\Containers\User\UI\API\Transformers\GetUserTransformer;
 
 use App\Ship\Parents\Controllers\ApiController;
 
 use Illuminate\Http\JsonResponse;
-
-use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 final class UserController extends ApiController
 {
@@ -43,7 +39,7 @@ final class UserController extends ApiController
      */
     public function getAll(): JsonResponse
     {
-        return response()->json(app(GetUsersAction::class)->run());
+        return $this->response($this->action(GetUsersAction::class));
     }
 
     /**
@@ -80,10 +76,11 @@ final class UserController extends ApiController
      *  )
      * @param int $id
      * @return JsonResponse
-     * @throws UnknownProperties
      */
     public function getById(int $id): JsonResponse
     {
-        return response()->json(app(GetUserAction::class)->run(new GetUserDTO(id: $id)));
+        $response['data'] = $this->action(GetUserAction::class, GetUserDTO::from(['id' => $id]));
+
+        return $this->response($response);
     }
 }

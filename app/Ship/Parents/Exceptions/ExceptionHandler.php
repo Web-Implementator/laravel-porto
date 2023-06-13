@@ -6,7 +6,7 @@ namespace App\Ship\Parents\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler;
 
-class ExceptionHandler extends Handler
+final class ExceptionHandler extends Handler
 {
     /**
      * A list of exception types with their corresponding custom log levels.

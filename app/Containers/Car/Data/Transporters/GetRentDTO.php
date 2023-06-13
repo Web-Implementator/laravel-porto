@@ -8,12 +8,18 @@ use App\Ship\Parents\Transporters\Data;
 
 final class GetRentDTO extends Data
 {
-    /*** @var int */
-    public int $id;
+    public function __construct(
+        public int $rentId,
+        public ?int $userId,
+        public ?int $carId,
+    ) {
+    }
 
-    /*** @var ?int */
-    public ?int $user_id;
-
-    /*** @var ?int */
-    public ?int $car_id;
+    /**
+     * @return int
+     */
+    public function getPrimaryId(): int
+    {
+        return $this->rentId;
+    }
 }

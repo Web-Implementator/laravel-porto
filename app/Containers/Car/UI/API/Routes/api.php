@@ -24,7 +24,7 @@ Route::prefix('rent')
         Route::get('/{id}', 'RentController@getById')->name('getById')->whereNumber('id');
 
         // Начать аренду машины
-        Route::post('/start', 'RentController@begin')->name('begin');
+        Route::post('/begin', 'RentController@begin')->name('begin');
 
         // Завершить аренду машины
         Route::post('/end', 'RentController@end')->name('end');

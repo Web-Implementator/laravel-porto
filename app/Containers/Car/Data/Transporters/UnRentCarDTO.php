@@ -8,9 +8,17 @@ use App\Ship\Parents\Transporters\Data;
 
 final class UnRentCarDTO extends Data
 {
-    /*** @var int */
-    public int $car_id;
+    public function __construct(
+        public ?int $rentId,
+        public int $userId,
+    ) {
+    }
 
-    /*** @var int */
-    public int $user_id;
+    /**
+     * @return int
+     */
+    public function getPrimaryId(): int
+    {
+        return $this->rentId;
+    }
 }

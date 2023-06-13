@@ -7,7 +7,6 @@ namespace App\Containers\Car\Actions;
 use App\Containers\Car\Data\Repositories\CarRepository;
 use App\Containers\Car\Data\Transporters\GetCarDTO;
 use App\Containers\Car\Resources\CarResource;
-
 use App\Ship\Parents\Actions\Action;
 
 final class GetCarAction extends Action
@@ -23,6 +22,6 @@ final class GetCarAction extends Action
      */
     public function run(GetCarDTO $dto): CarResource
     {
-        return $this->repository->getByID($dto);
+        return $this->repository->getByID($dto->carId);
     }
 }

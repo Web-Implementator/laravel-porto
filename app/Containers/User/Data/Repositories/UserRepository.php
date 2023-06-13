@@ -4,64 +4,60 @@ declare(strict_types=1);
 
 namespace App\Containers\User\Data\Repositories;
 
-use App\Containers\User\Contracts\UserRepositoryInterface;
-use App\Containers\User\Data\Transporters\GetUserDTO;
-use App\Containers\User\Data\Transporters\UserUpdateDTO;
 use App\Containers\User\Models\UserModel;
-
+use App\Containers\User\Resources\UserCollection;
 use App\Containers\User\Resources\UserResource;
 use App\Ship\Parents\Repositories\Repository;
 
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-
-final class UserRepository extends Repository implements UserRepositoryInterface
+final class UserRepository extends Repository
 {
     /**
-     * @return AnonymousResourceCollection
+     * @return UserCollection
      */
-    public function getAll(): AnonymousResourceCollection
+    public function getAll(): UserCollection
     {
-        return UserResource::collection(UserModel::active()->get());
+        return new UserCollection(UserModel::active()->get());
     }
 
 
     /**
-     * @param GetUserDTO $dto
+     * @param string|int $id
      * @return UserResource
      */
-    public function getById(GetUserDTO $dto): UserResource
+    public function getById(string|int $id): UserResource
     {
-        return new UserResource(UserModel::active()->findOrFail($dto->id));
+        return new UserResource(UserModel::active()->findOrFail($id));
     }
 
     /**
-     * @param array $details
+     * @param array $data
      * @return UserResource
      */
-    public function create(array $details): UserResource
+    public function create(array $data): UserResource
     {
-        return new UserResource(UserModel::create($details));
+        return new UserResource(UserModel::create($data));
     }
 
     /**
-     * @param UserUpdateDTO $dto
+     * @param string|int $id
+     * @param array $data
      * @return UserResource
      */
-    public function update(UserUpdateDTO $dto): UserResource
+    public function update(string|int $id, array $data): UserResource
     {
-        $model = UserModel::findOrFail($dto->id);
+        $model = UserModel::findOrFail($id);
 
-        $model->fill($dto->details->toArray());
+        $model->fill($data);
         $model->save();
 
         return new UserResource($model);
     }
 
     /**
-     * @param int $id
+     * @param string|int $id
      * @return void
      */
-    public function delete(int $id): void
+    public function delete(string|int $id): void
     {
         UserModel::destroy($id);
     }

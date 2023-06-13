@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace App\Ship\Parents\Controllers;
 
+use App\Ship\Generic\Traits\ApiResponseTrait;
+use App\Ship\Generic\Traits\MessageTrait;
+use App\Ship\Parents\Exceptions\UnknownInterfaceException;
+use Illuminate\Http\JsonResponse;
+
 /**
  * @OA\Info(
  *      version="1.0.0",
@@ -20,9 +25,13 @@ namespace App\Ship\Parents\Controllers;
  */
 abstract class ApiController extends Controller
 {
+    use ApiResponseTrait;
+
     /**
-     * The type of this controller. This will be accessibly mirrored in the Actions.
-     * Giving each Action the ability to modify it's internal business logic based on the UI type that called it.
+     * @throws UnknownInterfaceException
      */
-    public string $ui = 'api';
+    public function __construct()
+    {
+        $this->setUi('api');
+    }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Ship\Parents\Kernels;
 
 use App\Ship\Generic\Middlewares\{
-    ExceptionApi,
+    ApiResponse,
     Language,
 };
 
@@ -22,7 +22,7 @@ use App\Ship\Parents\Middlewares\{
 
 use Illuminate\Foundation\Http\Kernel;
 
-class KernelHttp extends Kernel
+final class KernelHttp extends Kernel
 {
     /**
      * The application's global HTTP middleware stack.
@@ -61,7 +61,7 @@ class KernelHttp extends Kernel
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            ExceptionApi::class,
+            ApiResponse::class,
         ],
     ];
 

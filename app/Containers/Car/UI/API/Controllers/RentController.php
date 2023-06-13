@@ -13,12 +13,8 @@ use App\Containers\Car\Data\Transporters\RentCarDTO;
 use App\Containers\Car\Data\Transporters\UnRentCarDTO;
 use App\Containers\Car\UI\API\Requests\RentRequest;
 use App\Containers\Car\UI\API\Requests\UnRentRequest;
-
 use App\Ship\Parents\Controllers\ApiController;
-
 use Illuminate\Http\JsonResponse;
-
-use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 final class RentController extends ApiController
 {
@@ -47,7 +43,7 @@ final class RentController extends ApiController
      */
     public function getAll(): JsonResponse
     {
-        return response()->json(app(GetRentsAction::class)->run());
+        return $this->response($this->action(GetRentsAction::class));
     }
 
     /**
@@ -84,21 +80,22 @@ final class RentController extends ApiController
      *  )
      * @param int $id
      * @return JsonResponse
-     * @throws UnknownProperties
      */
     public function getById(int $id): JsonResponse
     {
-        return response()->json(app(GetRentAction::class)->run(new GetRentDTO(id: $id)));
+        $response['data'] = $this->action(GetRentAction::class, GetRentDTO::from(['rentId' => $id]));
+
+        return $this->response($response);
     }
 
     /**
      * @OA\Post(
-     *      path="/api/v1/car/rent/start",
+     *      path="/api/v1/car/rent/begin",
      *      operationId="carRentBegin",
      *      tags={"Rent"},
      *      summary="Начать аренду автомобиля",
      *      @OA\Parameter(
-     *          name="car_id",
+     *          name="carId",
      *          in="query",
      *          required=true,
      *          @OA\Schema(
@@ -106,7 +103,7 @@ final class RentController extends ApiController
      *          )
      *      ),
      *      @OA\Parameter(
-     *          name="user_id",
+     *          name="userId",
      *          in="query",
      *          required=true,
      *          @OA\Schema(
@@ -134,13 +131,18 @@ final class RentController extends ApiController
      *  )
      * @param RentRequest $request
      * @return JsonResponse
-     * @throws UnknownProperties
      */
     public function begin(RentRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
-        return response()->json(app(RentCarAction::class)->run(new RentCarDTO($validated)));
+        $resource = $this->action(RentCarAction::class, RentCarDTO::from($validated));
+
+        $response['data'] = $resource;
+
+        $response = $this->addMessage($response,'Вы успешно арендовали автомобиль');
+
+        return $this->response($response);
     }
 
     /**
@@ -150,15 +152,7 @@ final class RentController extends ApiController
      *      tags={"Rent"},
      *      summary="Завершить аренду автомобиля",
      *      @OA\Parameter(
-     *          name="car_id",
-     *          in="query",
-     *          required=true,
-     *          @OA\Schema(
-     *              type="integer"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="user_id",
+     *          name="userId",
      *          in="query",
      *          required=true,
      *          @OA\Schema(
@@ -186,12 +180,17 @@ final class RentController extends ApiController
      *  )
      * @param UnRentRequest $request
      * @return JsonResponse
-     * @throws UnknownProperties
      */
     public function end(UnRentRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
-        return response()->json(app(UnRentCarAction::class)->run(new UnRentCarDTO($validated)));
+        $resource = $this->action(UnRentCarAction::class, UnRentCarDTO::from($validated));
+
+        $response['data'] = $resource;
+
+        $response = $this->addMessage($response,'Вы успешно завершили аренду');
+
+        return $this->response($response);
     }
 }

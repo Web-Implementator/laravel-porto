@@ -7,7 +7,7 @@ namespace App\Containers\Car\Actions;
 use App\Containers\Car\Data\Repositories\RentRepository;
 use App\Containers\Car\Data\Transporters\GetRentDTO;
 use App\Containers\Car\Resources\CarResource;
-
+use App\Containers\Car\Resources\RentResource;
 use App\Ship\Parents\Actions\Action;
 
 final class GetRentAction extends Action
@@ -19,10 +19,12 @@ final class GetRentAction extends Action
 
     /**
      * @param GetRentDTO $dto
-     * @return CarResource
+     * @return RentResource
      */
-    public function run(GetRentDTO $dto): CarResource
+    public function run(GetRentDTO $dto): RentResource
     {
-        return $this->repository->getByID($dto);
+        $id = $dto->getPrimaryId();
+
+        return $this->repository->getByID($id);
     }
 }
