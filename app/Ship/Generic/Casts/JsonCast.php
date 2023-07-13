@@ -11,13 +11,13 @@ class JsonCast extends CastsAttributes
     /**
      * Cast the given value.
      *
-     * @param  Model  $model
-     * @param  string  $key
-     * @param  mixed  $value
-     * @param  array  $attributes
+     * @param Model  $model
+     * @param string $key
+     * @param mixed  $value
+     * @param array  $attributes
      * @return ?array
      */
-    public function get($model, string $key, mixed $value, array $attributes): ?array
+    public function get(Model $model, string $key, mixed $value, array $attributes): ?array
     {
         return json_decode($value, true);
     }
@@ -26,12 +26,12 @@ class JsonCast extends CastsAttributes
      * Prepare the given value for storage.
      *
      * @param  Model  $model
-     * @param  string  $key
+     * @param  string $key
      * @param  mixed  $value
      * @param  array  $attributes
      * @return string
      */
-    public function set($model, string $key, mixed $value, array $attributes): string
+    public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
         if (is_array($value)) {
             return json_encode($value);

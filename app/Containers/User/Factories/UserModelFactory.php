@@ -3,12 +3,11 @@
 namespace App\Containers\User\Factories;
 
 use App\Containers\User\Models\UserModel;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Containers\User\Models>
+ * @extends Factory<UserModel>
  */
 final class UserModelFactory extends Factory
 {

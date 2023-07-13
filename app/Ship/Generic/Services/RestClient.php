@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Ship\Generic\Services;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
-
+use GuzzleHttp\Promise\FulfilledPromise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -23,10 +22,11 @@ final class RestClient extends Client
         parent::__construct($config);
 
         $this->getHandler()->push(fn(callable $handler) => function (RequestInterface $request, array $options) use ($handler) {
-            $this->lastRequest = $request;
-            $this->lastResponse = null;
 
-            /** @var \GuzzleHttp\Promise\FulfilledPromise $promise */
+            $this->setLastRequest($request);
+            $this->setLastResponse(null);
+
+            /** @var FulfilledPromise $promise */
             $promise = $handler($request, $options);
 
             return $promise->then(fn(ResponseInterface $response) => $this->lastResponse = $response);
@@ -34,9 +34,9 @@ final class RestClient extends Client
     }
 
     /**
-     * @return HandlerStack
+     * @return mixed
      */
-    protected function getHandler(): HandlerStack
+    protected function getHandler(): mixed
     {
         return $this->getConfig('handler');
     }
@@ -50,10 +50,26 @@ final class RestClient extends Client
     }
 
     /**
+     * @param RequestInterface|null $lastRequest
+     */
+    public function setLastRequest(?RequestInterface $lastRequest): void
+    {
+        $this->lastRequest = $lastRequest;
+    }
+
+    /**
      * @return ResponseInterface|null
      */
     public function getLastResponse(): ?ResponseInterface
     {
         return $this->lastResponse;
+    }
+
+    /**
+     * @param ResponseInterface|null $lastResponse
+     */
+    public function setLastResponse(?ResponseInterface $lastResponse): void
+    {
+        $this->lastResponse = $lastResponse;
     }
 }

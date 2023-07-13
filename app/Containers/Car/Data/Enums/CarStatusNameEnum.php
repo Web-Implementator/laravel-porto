@@ -4,14 +4,7 @@ namespace App\Containers\Car\Data\Enums;
 
 enum CarStatusNameEnum: string
 {
-    /**
-     * Свободен
-     */
     case free = 'Свободен';
-
-    /**
-     * Занят
-     */
     case busy = 'Занят';
 
     public static function fromName(string $name): string

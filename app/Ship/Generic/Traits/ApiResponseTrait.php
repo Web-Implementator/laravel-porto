@@ -9,6 +9,8 @@ use Illuminate\Http\JsonResponse;
 trait ApiResponseTrait
 {
     /**
+     * Метод добавляем сообщение в определённом стиле к API ответу
+     *
      * @param mixed $response
      * @param string $message
      * @param ?int $code

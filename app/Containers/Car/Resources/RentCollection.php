@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Containers\Car\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
-
 use Illuminate\Http\Request;
 
 final class RentCollection extends ResourceCollection

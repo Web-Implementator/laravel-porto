@@ -2,8 +2,8 @@
 
 namespace App\Ship\Generic\Middlewares;
 
-use App,
-    Closure;
+use App;
+use Closure;
 use App\Ship\Generic\Exceptions\RentException;
 use App\Ship\Generic\Traits\ApiResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -14,7 +14,7 @@ final class ApiResponse
     use ApiResponseTrait;
 
     /**
-     * Handle an incoming request.
+     * Обработчик API ответов в том числе исключений
      *
      * @param Request $request
      * @param  Closure  $next

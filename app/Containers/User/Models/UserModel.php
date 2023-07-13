@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Containers\User\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Containers\User\Factories\UserModelFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authentication;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-final class UserModel extends Authenticatable
+final class UserModel extends Authentication
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -25,11 +26,11 @@ final class UserModel extends Authenticatable
     /**
      * Create a new factory instance for the model.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
-    protected static function newFactory()
+    protected static function newFactory(): Factory
     {
-        return \App\Containers\User\Factories\UserModelFactory::new();
+        return UserModelFactory::new();
     }
 
     /**

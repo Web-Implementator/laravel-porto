@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Containers\Car\Resources;
 
 use App\Ship\Parents\Resources\JsonResource;
-
-use Illuminate\Http\Request,
-    Carbon\Carbon;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 final class CarResource extends JsonResource
 {
@@ -24,7 +23,7 @@ final class CarResource extends JsonResource
      * @param Request $request
      * @return array
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
