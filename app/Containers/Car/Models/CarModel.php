@@ -6,9 +6,10 @@ namespace App\Containers\Car\Models;
 
 use App\Containers\Car\Data\Enums\CarStatusEnum;
 use App\Containers\Car\Data\Enums\CarStatusNameEnum;
+use App\Containers\Car\Factories\CarModelFactory;
 use App\Ship\Parents\Models\Model;
-
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
@@ -26,11 +27,11 @@ final class CarModel extends Model
     /**
      * Create a new factory instance for the model.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
-    protected static function newFactory()
+    protected static function newFactory(): Factory
     {
-        return \App\Containers\Car\Factories\CarModelFactory::new();
+        return CarModelFactory::new();
     }
 
     /**

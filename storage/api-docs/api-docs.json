@@ -1,12 +1,12 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Integration Swagger in Laravel 9",
-        "description": "Implementation of Swagger with in Laravel 9",
+        "title": "Integration Swagger in Laravel 10",
+        "description": "Implementation of Swagger with in Laravel 10",
         "contact": {
             "email": "slava.akulov.1996@gmail.com"
         },
-        "version": "1.0.0"
+        "version": "1.2.1"
     },
     "servers": [
         {

@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Containers\Language\UI\Web\Controllers;
 
 use App\Containers\Language\UI\Web\Requests\LanguageChangeRequest;
-
 use App\Ship\Parents\Controllers\WebController;
-
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;

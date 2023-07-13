@@ -7,9 +7,7 @@ namespace App\Containers\User\UI\API\Controllers;
 use App\Containers\User\Actions\GetUserAction;
 use App\Containers\User\Actions\GetUsersAction;
 use App\Containers\User\Data\Transporters\GetUserDTO;
-
 use App\Ship\Parents\Controllers\ApiController;
-
 use Illuminate\Http\JsonResponse;
 
 final class UserController extends ApiController

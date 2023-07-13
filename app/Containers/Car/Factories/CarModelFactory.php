@@ -3,12 +3,11 @@
 namespace App\Containers\Car\Factories;
 
 use App\Containers\Car\Models\CarModel;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Containers\User\Models>
+ * @extends Factory<CarModel>
  */
 final class CarModelFactory extends Factory
 {

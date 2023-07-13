@@ -9,8 +9,6 @@ use App\Containers\User\Models\UserModel;
 use App\Containers\User\Resources\UserResource;
 use App\Ship\Parents\Models\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class RentModel extends Model
 {

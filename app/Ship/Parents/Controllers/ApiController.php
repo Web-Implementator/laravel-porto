@@ -11,9 +11,9 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * @OA\Info(
- *      version="1.0.0",
- *      title="Integration Swagger in Laravel 9",
- *      description="Implementation of Swagger with in Laravel 9",
+ *      version="1.2.1",
+ *      title="Integration Swagger in Laravel 10",
+ *      description="Implementation of Swagger with in Laravel 10",
  *      @OA\Contact(
  *          email="slava.akulov.1996@gmail.com"
  *      ),

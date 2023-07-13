@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Containers\User\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
-
 use Illuminate\Http\Request;
 
 final class UserCollection extends ResourceCollection
