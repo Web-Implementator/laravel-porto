@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Ship\Parents\Controllers;
 
 use App\Ship\Generic\Traits\ApiResponseTrait;
-use App\Ship\Generic\Traits\MessageTrait;
 use App\Ship\Parents\Exceptions\UnknownInterfaceException;
 use Exception;
-use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(

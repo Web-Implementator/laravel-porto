@@ -1,28 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Ship\Generic\Middlewares;
 
-use App,
-    Closure,
-    Session;
-
+use Closure;
 use Illuminate\Http\Request;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 final class Language
 {
     /**
-     * Handle an incoming request.
-     *
      * @param Request $request
-     * @param  Closure  $next
+     * @param Closure $next
      * @return mixed
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function handle(Request $request, Closure $next): mixed
     {
-        if (Session::has('language')) {
-            App::setLocale(Session::get('language'));
+        if (session()->has('language')) {
+            app()->setLocale(session()->get('language'));
         } else {
-            Session::put('language', App::currentLocale());
+            session()->put('language', app()->currentLocale());
         }
 
         return $next($request);

@@ -8,4 +8,5 @@ use Illuminate\Database\Seeder as IlluminateSeeder;
 
 abstract class Seeder extends IlluminateSeeder
 {
+
 }

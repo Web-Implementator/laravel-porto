@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Ship\Generic\Casts;
 
 use App\Ship\Parents\Casts\CastsAttributes;
-
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
-class JsonCast extends CastsAttributes
+final class JsonCast extends CastsAttributes
 {
     /**
      * Cast the given value.
@@ -25,11 +27,12 @@ class JsonCast extends CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param  Model  $model
-     * @param  string $key
-     * @param  mixed  $value
-     * @param  array  $attributes
+     * @param Model $model
+     * @param string $key
+     * @param mixed $value
+     * @param array $attributes
      * @return string
+     * @throws Exception
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): string
     {
@@ -40,5 +43,7 @@ class JsonCast extends CastsAttributes
         if (is_string($value)) {
             return $value;
         }
+
+        throw new Exception('Не известный тип');
     }
 }

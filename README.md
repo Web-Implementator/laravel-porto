@@ -57,7 +57,11 @@ git clone https://github.com/Web-Implementator/laravel-porto.git
 
 Copy and edit config .env file
 ``` bash
-cd ./laravel-porto
+cp .env.example .env
+```
+
+Run installer
+``` bash
 make project-install
 ```
 

@@ -17,7 +17,6 @@ abstract class Request extends IlluminateFormRequest
      * Be sure you know what you do!
      *
      * @param array $fields
-     * @throws IncorrectIdException
      */
     public function mapInput(array $fields): void
     {
@@ -39,13 +38,12 @@ abstract class Request extends IlluminateFormRequest
     }
 
     /**
-     * Overriding this function to modify the any user input before
+     * Overriding this function to modify any user input before
      * applying the validation rules.
      *
      * @param null $keys
      *
      * @return  array
-     * @throws IncorrectIdException
      */
     public function all($keys = null): array
     {
@@ -82,7 +80,6 @@ abstract class Request extends IlluminateFormRequest
      * @param $default
      *
      * @return mixed
-     * @throws IncorrectIdException
      */
     public function getInputByKey($key = null, $default = null): mixed
     {

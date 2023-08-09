@@ -8,7 +8,6 @@ use App\Ship\Generic\Middlewares\{
     ApiResponse,
     Language,
 };
-
 use App\Ship\Parents\Middlewares\{
     Authenticate,
     EncryptCookies,
@@ -19,7 +18,6 @@ use App\Ship\Parents\Middlewares\{
     ValidateSignature,
     VerifyCsrfToken,
 };
-
 use Illuminate\Foundation\Http\Kernel;
 
 final class KernelHttp extends Kernel

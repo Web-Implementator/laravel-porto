@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Ship\Generic\Middlewares;
 
-use App;
 use App\Ship\Generic\Exceptions\PolicyException;
 use Closure;
 use App\Ship\Generic\Exceptions\RentException;

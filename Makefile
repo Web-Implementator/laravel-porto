@@ -27,7 +27,7 @@ project-install:
 	make dc-up
 	$(DOCKER_PHP) $(ARTISAN) key:generate
 	make migrate
-	make swagger
+	make api-docs
 
 # Running Autotests
 project-test:

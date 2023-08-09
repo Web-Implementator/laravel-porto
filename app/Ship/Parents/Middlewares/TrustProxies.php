@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Ship\Parents\Middlewares;
 
 use Illuminate\Http\Middleware\TrustProxies as IlluminateTrustProxies;
-
-use Request;
+use Symfony\Component\HttpFoundation\Request;
 
 final class TrustProxies extends IlluminateTrustProxies
 {

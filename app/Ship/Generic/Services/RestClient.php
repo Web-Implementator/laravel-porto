@@ -11,7 +11,14 @@ use Psr\Http\Message\ResponseInterface;
 
 final class RestClient extends Client
 {
+    /**
+     * @var RequestInterface|null
+     */
     protected ?RequestInterface $lastRequest;
+
+    /**
+     * @var ResponseInterface|null
+     */
     protected ?ResponseInterface $lastResponse;
 
     /**

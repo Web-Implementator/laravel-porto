@@ -4,33 +4,20 @@ declare(strict_types=1);
 
 namespace App\Ship\Parents\Actions;
 
+use App\Ship\Parents\Exceptions\UnknownInterfaceException;
+use App\Ship\Parents\Traits\UiTrait;
+
 abstract class Action
 {
-    /*** @var string */
-    private string $ui;
+    use UiTrait;
 
     /**
      * @param string $ui
      * @return void
+     * @throws UnknownInterfaceException
      */
     public function init(string $ui): void
     {
         $this->setUi($ui);
-    }
-
-    /**
-     * @return string
-     */
-    public function getUi(): string
-    {
-        return $this->ui;
-    }
-
-    /**
-     * @param string $ui
-     */
-    public function setUi(string $ui): void
-    {
-        $this->ui = $ui;
     }
 }

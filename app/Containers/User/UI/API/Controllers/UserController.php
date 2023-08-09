@@ -11,6 +11,7 @@ use App\Containers\User\Models\UserModel;
 use App\Ship\Generic\Exceptions\PolicyException;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 
 final class UserController extends ApiController
 {
@@ -94,10 +95,17 @@ final class UserController extends ApiController
      *  )
      * @param int $id
      * @return JsonResponse
+     * @throws PolicyException
      */
     public function getById(int $id): JsonResponse
     {
-        $user = UserModel::findOrFail(2);
+        $users = UserModel::all();
+
+        if (count($users) === 0) {
+            abort(403);
+        }
+
+        $user = $users[0];
 
         auth()->login($user);
 
