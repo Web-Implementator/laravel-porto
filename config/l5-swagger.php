@@ -58,7 +58,7 @@ return [
             'oauth2_callback' => 'api/oauth2-callback',
 
             /*
-             * Middleware allows to prevent unexpected access to API documentation
+             * MiddlewareAbstract allows to prevent unexpected access to API documentation
             */
             'middleware' => [
                 'api' => [],

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Containers\User\Models;
 
 use App\Containers\User\Factories\UserModelFactory;
-use App\Ship\Parents\Models\ModelInterface;
+use App\Ship\Contracts\ModelInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

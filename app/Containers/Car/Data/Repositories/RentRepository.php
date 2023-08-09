@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Repositories;
 
-use App\Containers\Car\Models\RentModel;
+use App\Containers\Car\Models\RentModelAbstract;
 use App\Containers\Car\Resources\RentCollection;
 use App\Containers\Car\Resources\RentResource;
-use App\Ship\Parents\Repositories\Repository;
+use App\Ship\Abstracts\Repositories\Repository;
 
 final class RentRepository extends Repository
 {
@@ -16,7 +16,7 @@ final class RentRepository extends Repository
      */
     public function getAll(): RentCollection
     {
-        return new RentCollection(RentModel::get());
+        return new RentCollection(RentModelAbstract::get());
     }
 
     /**
@@ -25,7 +25,7 @@ final class RentRepository extends Repository
      */
     public function getByID(int|string $id): RentResource
     {
-        return new RentResource(RentModel::findOrFail($id));
+        return new RentResource(RentModelAbstract::findOrFail($id));
     }
 
     /**
@@ -34,7 +34,7 @@ final class RentRepository extends Repository
      */
     public function getByCarId(int $car_id): ?RentResource
     {
-        $query = RentModel::active()->carId($car_id)->first();
+        $query = RentModelAbstract::active()->carId($car_id)->first();
 
         if (!empty($query)) {
             return new RentResource($query);
@@ -49,7 +49,7 @@ final class RentRepository extends Repository
      */
     public function getByUserId(int $user_id): ?RentResource
     {
-        $query = RentModel::active()->userId($user_id)->first();
+        $query = RentModelAbstract::active()->userId($user_id)->first();
 
         if (!empty($query)) {
             return new RentResource($query);
@@ -64,7 +64,7 @@ final class RentRepository extends Repository
      */
     public function create(array $data): RentResource
     {
-        return new RentResource(RentModel::create($data));
+        return new RentResource(RentModelAbstract::create($data));
     }
 
     /**
@@ -74,7 +74,7 @@ final class RentRepository extends Repository
      */
     public function update(int|string $id, array $data): RentResource
     {
-        $model = RentModel::findOrFail($id);
+        $model = RentModelAbstract::findOrFail($id);
 
         $model->fill($data);
 
@@ -89,6 +89,6 @@ final class RentRepository extends Repository
      */
     public function delete(int|string $id): void
     {
-        RentModel::destroy($id);
+        RentModelAbstract::destroy($id);
     }
 }

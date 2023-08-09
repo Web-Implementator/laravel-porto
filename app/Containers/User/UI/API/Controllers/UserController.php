@@ -8,15 +8,15 @@ use App\Containers\User\Actions\GetUserAction;
 use App\Containers\User\Actions\GetUsersAction;
 use App\Containers\User\Data\Transporters\GetUserDTO;
 use App\Containers\User\Models\UserModel;
-use App\Ship\Generic\Exceptions\PolicyException;
-use App\Ship\Parents\Controllers\ApiController;
+use App\Ship\Core\Exceptions\PolicyException;
+use App\Ship\Abstracts\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations as OA;
 
 final class UserController extends ApiController
 {
     /**
-     * Policy for current Controller
+     * PolicyAbstract for current Controller
      *
      * @see WebController
      * @return ?string

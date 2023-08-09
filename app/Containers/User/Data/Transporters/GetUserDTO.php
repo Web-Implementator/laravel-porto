@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Containers\User\Data\Transporters;
 
-use App\Ship\Parents\Transporters\Data;
+use App\Ship\Abstracts\Transporters\DataAbstract;
 
-final class GetUserDTO extends Data
+final class GetUserDTO extends DataAbstract
 {
     public function __construct(
         public int $id,

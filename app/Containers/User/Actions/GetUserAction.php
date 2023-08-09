@@ -7,7 +7,7 @@ namespace App\Containers\User\Actions;
 use App\Containers\User\Data\Repositories\UserRepository;
 use App\Containers\User\Data\Transporters\GetUserDTO;
 use App\Containers\User\Resources\UserResource;
-use App\Ship\Parents\Actions\Action;
+use App\Ship\Abstracts\Actions\Action;
 
 final class GetUserAction extends Action
 {

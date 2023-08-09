@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Repositories;
 
-use App\Containers\Car\Models\CarModel;
+use App\Containers\Car\Models\CarModelAbstract;
 use App\Containers\Car\Resources\CarCollection;
 use App\Containers\Car\Resources\CarResource;
-use App\Ship\Parents\Repositories\Repository;
+use App\Ship\Abstracts\Repositories\Repository;
 
 final class CarRepository extends Repository
 {
@@ -16,7 +16,7 @@ final class CarRepository extends Repository
      */
     public function getAll(): CarCollection
     {
-        return new CarCollection(CarModel::active()->get());
+        return new CarCollection(CarModelAbstract::active()->get());
     }
 
     /**
@@ -25,7 +25,7 @@ final class CarRepository extends Repository
      */
     public function getByID(int|string $id): CarResource
     {
-        return new CarResource(CarModel::active()->findOrFail($id));
+        return new CarResource(CarModelAbstract::active()->findOrFail($id));
     }
 
     /**
@@ -34,7 +34,7 @@ final class CarRepository extends Repository
      */
     public function create(array $data): CarResource
     {
-        return new CarResource(CarModel::create($data));
+        return new CarResource(CarModelAbstract::create($data));
     }
 
     /**
@@ -44,7 +44,7 @@ final class CarRepository extends Repository
      */
     public function update(int|string $id, array $data): CarResource
     {
-        $model = CarModel::findOrFail($id);
+        $model = CarModelAbstract::findOrFail($id);
 
         $model->fill($data);
 
@@ -59,6 +59,6 @@ final class CarRepository extends Repository
      */
     public function delete(int|string $id): void
     {
-        CarModel::destroy($id);
+        CarModelAbstract::destroy($id);
     }
 }

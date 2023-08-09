@@ -2,7 +2,7 @@
 
 namespace App\Containers\Car\Seeders;
 
-use App\Containers\Car\Models\CarModel;
+use App\Containers\Car\Models\CarModelAbstract;
 use Illuminate\Database\Seeder;
 
 final class CarsTableSeeder extends Seeder
@@ -15,7 +15,7 @@ final class CarsTableSeeder extends Seeder
     public function run(): void
     {
         if (isLocal()) {
-            CarModel::factory(10)->create();
+            CarModelAbstract::factory(10)->create();
         }
     }
 }

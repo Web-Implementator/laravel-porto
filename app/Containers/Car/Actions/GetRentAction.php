@@ -7,7 +7,7 @@ namespace App\Containers\Car\Actions;
 use App\Containers\Car\Data\Repositories\RentRepository;
 use App\Containers\Car\Data\Transporters\GetRentDTO;
 use App\Containers\Car\Resources\RentResource;
-use App\Ship\Parents\Actions\Action;
+use App\Ship\Abstracts\Actions\Action;
 
 final class GetRentAction extends Action
 {

@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Contracts\Support\Arrayable;
+
 return [
     /*
      * The package will use this format when working with dates. If this option
@@ -13,8 +15,8 @@ return [
      * types.
      */
     'transformers' => [
-        DateTimeInterface::class => \Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer::class,
-        \Illuminate\Contracts\Support\Arrayable::class => \Spatie\LaravelData\Transformers\ArrayableTransformer::class,
+        DateTimeInterface::class => Spatie\LaravelData\Transformers\DateTimeInterfaceTransformer::class,
+        Arrayable::class => Spatie\LaravelData\Transformers\ArrayableTransformer::class,
         BackedEnum::class => Spatie\LaravelData\Transformers\EnumTransformer::class,
     ],
 
@@ -55,7 +57,7 @@ return [
     ],
 
     /*
-     * Data objects can be wrapped into a key like 'data' when used as a resource,
+     * DataAbstract objects can be wrapped into a key like 'data' when used as a resource,
      * this key can be set globally here for all data objects. You can pass in
      * `null` if you want to disable wrapping.
      */

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Containers\Page\UI\Web\Controllers;
 
-use App\Ship\Parents\Controllers\WebController;
+use App\Ship\Abstracts\Controllers\WebController;
 
 final class PageController extends WebController
 {
     /**
-     * Policy for current Controller
+     * PolicyAbstract for current Controller
      *
      * @return ?string
      * @see WebController

@@ -9,8 +9,8 @@ use App\Containers\Car\Data\Repositories\RentRepository;
 use App\Containers\Car\Data\Enums\CarStatusEnum;
 use App\Containers\Car\Data\Transporters\UnRentCarDTO;
 use App\Containers\Car\Resources\CarResource;
-use App\Ship\Generic\Exceptions\RentException;
-use App\Ship\Parents\Actions\Action;
+use App\Ship\Core\Exceptions\RentException;
+use App\Ship\Abstracts\Actions\Action;
 use Exception, Carbon\Carbon, DB;
 
 final class UnRentCarAction extends Action

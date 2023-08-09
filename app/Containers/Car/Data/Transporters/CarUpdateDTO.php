@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Transporters;
 
-use App\Ship\Parents\Transporters\Data;
+use App\Ship\Abstracts\Transporters\DataAbstract;
 
-final class CarUpdateDTO extends Data
+final class CarUpdateDTO extends DataAbstract
 {
     public function __construct(
         public int $carId,

@@ -1,5 +1,10 @@
 <?php
 
+use App\Ship\Core\Providers\AuthServiceProvider;
+use App\Ship\Core\Providers\EventServiceProvider;
+use App\Ship\Core\Providers\RouteServiceProvider;
+use App\Ship\Core\Providers\AppServiceProvider;
+use App\Ship\Core\Providers\HorizonServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -115,7 +120,7 @@ return [
     | Encryption Key
     |--------------------------------------------------------------------------
     |
-    | This key is used by the Illuminate encrypter service and should be set
+    | This key is used by the Illuminate encrypted service and should be set
     | to a random, 32 character string, otherwise these encrypted strings
     | will not be safe. Please do this before deploying an application!
     |
@@ -145,7 +150,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Autoloaded Service Providers
+    | Autoloader Service Providers
     |--------------------------------------------------------------------------
     |
     | The service providers listed here will be automatically loaded on the
@@ -189,12 +194,12 @@ return [
         /*
          * Application Service Providers...
          */
-        \App\Ship\Parents\Providers\AppServiceProvider::class,
-        \App\Ship\Parents\Providers\AuthServiceProvider::class,
-        // App\Ship\Parents\Providers\BroadcastServiceProvider::class,
-        \App\Ship\Parents\Providers\EventServiceProvider::class,
-        \App\Ship\Parents\Providers\RouteServiceProvider::class,
-        \App\Ship\Generic\Providers\HorizonServiceProvider::class,
+        AppServiceProvider::class,
+        AuthServiceProvider::class,
+        // App\Ship\Abstracts\Providers\BroadcastServiceProviderAbstract::class,
+        EventServiceProvider::class,
+        RouteServiceProvider::class,
+        HorizonServiceProvider::class,
     ],
 
     /*
@@ -204,7 +209,7 @@ return [
     |
     | This array of class aliases will be registered when this application
     | is started. However, feel free to register as many as you wish as
-    | the aliases are "lazy" loaded so they don't hinder performance.
+    | the aliases are "lazy" loaded, so they don't hinder performance.
     |
     */
 

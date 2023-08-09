@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\UI\API\Requests;
 
-use App\Ship\Parents\Requests\RequestApi;
+use App\Ship\Abstracts\Requests\RequestApi;
 
 final class RentRequest extends RequestApi
 {

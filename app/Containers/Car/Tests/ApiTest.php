@@ -6,9 +6,9 @@ namespace App\Containers\Car\Tests;
 
 use App\Containers\Car\Data\Repositories\CarRepository;
 use App\Containers\Car\Data\Repositories\RentRepository;
-use App\Ship\Parents\Tests\PhpUnit;
+use App\Ship\Abstracts\Tests\PhpUnitAbstract;
 
-final class ApiTest extends PhpUnit
+final class ApiTest extends PhpUnitAbstract
 {
     /**
      * @return void

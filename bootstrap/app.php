@@ -7,9 +7,13 @@
 |
 | The first thing we will do is create a new Laravel application instance
 | which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all of the various parts.
+| the IoC container for the system binding all the various parts.
 |
 */
+
+use App\Ship\Core\Exceptions\ExceptionHandler;
+use App\Ship\Core\Kernels\KernelConsole;
+use App\Ship\Core\Kernels\KernelHttp;
 
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
@@ -28,17 +32,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    \App\Ship\Parents\Kernels\KernelHttp::class
+    KernelHttp::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    \App\Ship\Parents\Kernels\KernelConsole::class
+    KernelConsole::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    \App\Ship\Parents\Exceptions\ExceptionHandler::class
+    ExceptionHandler::class
 );
 
 /*
@@ -47,7 +51,7 @@ $app->singleton(
 |--------------------------------------------------------------------------
 |
 | This script returns the application instance. The instance is given to
-| the calling script so we can separate the building of the instances
+| the calling script, so we can separate the building of the instances
 | from the actual running of the application and sending responses.
 |
 */

@@ -19,7 +19,7 @@ Basic Laravel project for architecture Porto
 - [Laravel 10](https://github.com/laravel/laravel?ysclid=l9luwglcyd378360370)
 - [Porto architecture](https://github.com/Mahmoudz/Porto)
 - [Swagger](https://github.com/DarkaOnLine/L5-Swagger?ysclid=l9lv0y79lt190343942)
-- [Data Transfer Object](https://github.com/spatie/data-transfer-object?ysclid=l9lv0a72yl154342806)
+- [Data Transfer Object](https://spatie.be/docs/laravel-data)
 - [Fractal](https://github.com/spatie/laravel-fractal?ysclid=l9lv0ltaw3330622122)
 - [Horizon](https://laravel.su/docs/8.x/horizon?ysclid=l9o0yhkvvd508817367)
 
@@ -71,6 +71,11 @@ make migrate
 ```
 
 ### Additional features
+
+Generate container
+``` bash
+docker-compose exec app php artisan make:container Test
+```
 
 Fake data generation
 ``` bash

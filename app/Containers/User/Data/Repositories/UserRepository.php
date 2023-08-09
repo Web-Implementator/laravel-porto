@@ -7,7 +7,7 @@ namespace App\Containers\User\Data\Repositories;
 use App\Containers\User\Models\UserModel;
 use App\Containers\User\Resources\UserCollection;
 use App\Containers\User\Resources\UserResource;
-use App\Ship\Parents\Repositories\Repository;
+use App\Ship\Abstracts\Repositories\Repository;
 
 final class UserRepository extends Repository
 {

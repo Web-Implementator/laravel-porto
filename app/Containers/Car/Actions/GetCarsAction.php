@@ -6,7 +6,7 @@ namespace App\Containers\Car\Actions;
 
 use App\Containers\Car\Data\Repositories\CarRepository;
 use App\Containers\Car\Resources\CarCollection;
-use App\Ship\Parents\Actions\Action;
+use App\Ship\Abstracts\Actions\Action;
 
 final class GetCarsAction extends Action
 {

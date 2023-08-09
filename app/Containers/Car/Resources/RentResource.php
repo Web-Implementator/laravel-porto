@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Resources;
 
-use App\Ship\Parents\Resources\JsonResource;
+use App\Ship\Abstracts\Resources\JsonResource;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 

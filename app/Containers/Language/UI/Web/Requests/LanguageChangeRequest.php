@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Containers\Language\UI\Web\Requests;
 
-use App\Ship\Parents\Requests\RequestWeb;
+use App\Ship\Abstracts\Requests\RequestWeb;
 
 final class LanguageChangeRequest extends RequestWeb
 {

@@ -11,23 +11,23 @@ use App\Containers\Car\Actions\UnRentCarAction;
 use App\Containers\Car\Data\Transporters\GetRentDTO;
 use App\Containers\Car\Data\Transporters\RentCarDTO;
 use App\Containers\Car\Data\Transporters\UnRentCarDTO;
-use App\Containers\Car\Models\RentModel;
+use App\Containers\Car\Models\RentModelAbstract;
 use App\Containers\Car\UI\API\Requests\RentRequest;
 use App\Containers\Car\UI\API\Requests\UnRentRequest;
-use App\Ship\Parents\Controllers\ApiController;
+use App\Ship\Abstracts\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
 final class RentController extends ApiController
 {
     /**
-     * Policy for current Controller
+     * PolicyAbstract for current Controller
      *
      * @see WebController
      * @return ?string
      */
     protected function initPolicyModel(): ?string
     {
-        return RentModel::class;
+        return RentModelAbstract::class;
     }
 
     /**

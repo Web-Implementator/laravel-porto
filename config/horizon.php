@@ -61,7 +61,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Horizon Route Middleware
+    | Horizon Route MiddlewareAbstract
     |--------------------------------------------------------------------------
     |
     | These middleware will get attached onto each Horizon route, giving you
@@ -89,7 +89,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Job Trimming Times
+    | JobAbstract Trimming Times
     |--------------------------------------------------------------------------
     |
     | Here you can configure for how long (in minutes) you desire Horizon to

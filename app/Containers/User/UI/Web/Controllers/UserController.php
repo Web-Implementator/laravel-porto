@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Containers\User\UI\Web\Controllers;
 
 use App\Containers\User\Models\UserModel;
-use App\Ship\Parents\Controllers\WebController;
+use App\Ship\Abstracts\Controllers\WebController;
 use Illuminate\Auth\Access\AuthorizationException;
 
 final class UserController extends WebController
 {
     /**
-     * Policy for current Controller
+     * PolicyAbstract for current Controller
      *
      * @see WebController
      * @return ?string
@@ -22,7 +22,7 @@ final class UserController extends WebController
     }
 
     /**
-     * Policy usage example
+     * PolicyAbstract usage example
      *
      * @param int $id
      * @return mixed

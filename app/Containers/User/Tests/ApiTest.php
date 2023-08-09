@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Containers\User\Tests;
 
 use App\Containers\User\Data\Repositories\UserRepository;
-use App\Ship\Parents\Tests\PhpUnit;
+use App\Ship\Abstracts\Tests\PhpUnitAbstract;
 
-final class ApiTest extends PhpUnit
+final class ApiTest extends PhpUnitAbstract
 {
     /**
      * @return void
