@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect(route('users-welcome-container'));
+    return redirect(route('page.home'));
 });

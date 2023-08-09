@@ -18,5 +18,6 @@
     "Laravel`s robust library of first-party tools and libraries, such as": "Надежная библиотека Laravel с собственными инструментами и библиотеками, такими как",
     "help you take your projects to the next level. Pair them with powerful open source libraries like": "поможет вывести ваши проекты на новый уровень. Соедините их с мощными библиотеками с открытым исходным кодом, такими как",
     "and": "и",
-    "and more.": "и другие."
+    "and more.": "и другие.",
+    "If you see this page, then the user you are loading has access.": "Если вы видите эту страницу, значит, у загружаемого пользователя есть доступ."
 }

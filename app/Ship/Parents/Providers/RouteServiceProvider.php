@@ -113,15 +113,21 @@ final class RouteServiceProvider extends IlluminateRouteServiceProvider
             $parse_path = explode('/', explode('Containers', $path)[1]);
 
             $container_name = $parse_path[1];
-            $container_name_sub = $parse_path[2];
+            $container_name_lower = strtolower($container_name);
 
-            if ($container_name_sub !== 'UI') {
+            $container_name_sub = $parse_path[2];
+            $container_name_sub_lower = strtolower($container_name_sub);
+
+            if ($container_name_sub_lower !== 'ui') {
+                $name = "$container_name_lower.$container_name_sub_lower.";
                 $namespace = "$this->namespace\\$container_name\\$container_name_sub\\UI\\Web\\Controllers";
             } else {
+                $name = "$container_name_lower.";
                 $namespace = "$this->namespace\\$container_name\\UI\\Web\\Controllers";
             }
 
             Route::middleware('web')
+                ->name($name)
                 ->namespace($namespace)
                 ->group($path);
         }

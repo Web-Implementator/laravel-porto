@@ -7,11 +7,24 @@ namespace App\Containers\User\UI\API\Controllers;
 use App\Containers\User\Actions\GetUserAction;
 use App\Containers\User\Actions\GetUsersAction;
 use App\Containers\User\Data\Transporters\GetUserDTO;
+use App\Containers\User\Models\UserModel;
+use App\Ship\Generic\Exceptions\PolicyException;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
 final class UserController extends ApiController
 {
+    /**
+     * Policy for current Controller
+     *
+     * @see WebController
+     * @return ?string
+     */
+    protected function initPolicyModel(): ?string
+    {
+        return UserModel::class;
+    }
+
     /**
      * @OA\Get(
      *      path="/api/v1/user/getAll",
@@ -34,9 +47,16 @@ final class UserController extends ApiController
      *      ),
      *  )
      * @return JsonResponse
+     * @throws PolicyException
      */
     public function getAll(): JsonResponse
     {
+        $user = UserModel::findOrFail(2);
+
+        auth()->login($user);
+
+        $this->requestAccessCheck($user);
+
         return $this->response($this->action(GetUsersAction::class));
     }
 
@@ -77,6 +97,12 @@ final class UserController extends ApiController
      */
     public function getById(int $id): JsonResponse
     {
+        $user = UserModel::findOrFail(2);
+
+        auth()->login($user);
+
+        $this->requestAccessCheck($user);
+
         $response['data'] = $this->action(GetUserAction::class, GetUserDTO::from(['id' => $id]));
 
         return $this->response($response);

@@ -4,9 +4,8 @@
  * Information for understanding
  *
  * Prefix none
- * Name none
- * Namespace App\Containers\User\UI\API\Controllers
+ * Name Container Name Lower
+ * Namespace App\Containers\User\UI\Web\Controllers
  */
 
-// Базовая страница с шаблоном внутри контейнера
-Route::get('/users-welcome-container', 'UserController@users')->name('users-welcome-container');
+Route::get('/user/{id}', 'UserController@user')->name('getById')->whereNumber('id');

@@ -13,6 +13,17 @@ use Illuminate\Routing\Redirector;
 final class LanguageController extends WebController
 {
     /**
+     * The policy function is mandatory for the controller
+     *
+     * @see WebController
+     * @return ?string
+     */
+    public function initPolicyModel(): ?string
+    {
+        return null;
+    }
+
+    /**
      * @param LanguageChangeRequest $request
      * @return Application|RedirectResponse|Redirector
      */
@@ -30,6 +41,6 @@ final class LanguageController extends WebController
 
         app()->setLocale($locale);
 
-        return redirect(route('users-welcome-container'));
+        return redirect(route('page.home'));
     }
 }

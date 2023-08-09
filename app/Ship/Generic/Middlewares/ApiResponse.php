@@ -3,6 +3,7 @@
 namespace App\Ship\Generic\Middlewares;
 
 use App;
+use App\Ship\Generic\Exceptions\PolicyException;
 use Closure;
 use App\Ship\Generic\Exceptions\RentException;
 use App\Ship\Generic\Traits\ApiResponseTrait;
@@ -42,6 +43,20 @@ final class ApiResponse
                 return $this->response($responseException, $responseCode);
             } else if ($exception instanceof RentException) {
                 $responseCode = 400;
+                $responseException = [
+                    'data' => [],
+                ];
+
+                $responseException = $this->addMessage(
+                    $responseException,
+                    $exception->getMessage(),
+                    $responseCode
+                );
+
+                return $this->response($responseException, $responseCode);
+            } else if ($exception instanceof PolicyException) {
+
+                $responseCode = 403;
                 $responseException = [
                     'data' => [],
                 ];

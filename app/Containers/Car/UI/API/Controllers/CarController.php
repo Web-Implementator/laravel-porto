@@ -7,11 +7,23 @@ namespace App\Containers\Car\UI\API\Controllers;
 use App\Containers\Car\Actions\GetCarAction;
 use App\Containers\Car\Actions\GetCarsAction;
 use App\Containers\Car\Data\Transporters\GetCarDTO;
+use App\Containers\Car\Models\CarModel;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
 final class CarController extends ApiController
 {
+    /**
+     * Policy for current Controller
+     *
+     * @see WebController
+     * @return ?string
+     */
+    protected function initPolicyModel(): ?string
+    {
+        return CarModel::class;
+    }
+
     /**
      * @OA\Get(
      *      path="/api/v1/car/getAll",

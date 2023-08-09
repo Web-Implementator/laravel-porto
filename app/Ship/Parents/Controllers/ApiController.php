@@ -7,6 +7,7 @@ namespace App\Ship\Parents\Controllers;
 use App\Ship\Generic\Traits\ApiResponseTrait;
 use App\Ship\Generic\Traits\MessageTrait;
 use App\Ship\Parents\Exceptions\UnknownInterfaceException;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -29,9 +30,24 @@ abstract class ApiController extends Controller
 
     /**
      * @throws UnknownInterfaceException
+     * @throws Exception
      */
     public function __construct()
     {
         $this->setUi('api');
+
+        // Description of the logic inside the final controller
+        $this->setPolicyModel($this->initPolicyModel());
+
+        // Register policy
+        $this->policyRegister();
     }
+
+    /**
+     * Initialize policies
+     *
+     * @see \App\Ship\Parents\Controllers\Controller
+     * @return ?string
+     */
+    abstract protected function initPolicyModel(): ?string;
 }

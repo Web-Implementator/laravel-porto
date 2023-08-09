@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Ship\Parents\Providers;
 
+use App\Containers\User\Models\UserModel;
+use App\Containers\User\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as IlluminateAuthServiceProvider;
 
 final class AuthServiceProvider extends IlluminateAuthServiceProvider
@@ -14,7 +16,7 @@ final class AuthServiceProvider extends IlluminateAuthServiceProvider
      * @const array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        UserModel::class => UserPolicy::class,
     ];
 
     /**
@@ -25,7 +27,5 @@ final class AuthServiceProvider extends IlluminateAuthServiceProvider
     public function boot(): void
     {
         $this->registerPolicies();
-
-        //
     }
 }
