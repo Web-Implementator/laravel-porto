@@ -18,6 +18,14 @@ final class CarModelAbstract extends ModelAbstract
     use HasFactory;
 
     /**
+     * @return ?string
+     */
+    public function getPolicyName(): ?string
+    {
+        return 'user';
+    }
+
+    /**
      * The table associated with the model.
      *
      * @var string

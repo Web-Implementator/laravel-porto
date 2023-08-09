@@ -5,25 +5,16 @@ declare(strict_types=1);
 namespace App\Containers\User\Models;
 
 use App\Containers\User\Factories\UserModelFactory;
-use App\Ship\Contracts\ModelInterface;
+use App\Ship\Abstracts\Models\AuthenticationModelAbstract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authentication;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-final class UserModel extends Authentication implements ModelInterface
+final class UserModel extends AuthenticationModelAbstract
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * @return ?string
-     */
-    public function getPolicyName(): ?string
-    {
-        return 'user';
-    }
 
     /**
      * The table associated with the model.

@@ -13,6 +13,14 @@ use Illuminate\Database\Eloquent\Builder;
 final class RentModelAbstract extends ModelAbstract
 {
     /**
+     * @return ?string
+     */
+    public function getPolicyName(): ?string
+    {
+        return 'user';
+    }
+
+    /**
      * @var bool
      */
     public $timestamps = false;
