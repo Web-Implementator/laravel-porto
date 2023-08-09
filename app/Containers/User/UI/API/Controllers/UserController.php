@@ -52,9 +52,7 @@ final class UserController extends ApiController
      */
     public function getAll(): JsonResponse
     {
-        $user = UserModel::findOrFail(2);
-
-        auth()->login($user);
+        $user = authFake();
 
         $this->requestAccessCheck($user);
 
@@ -99,15 +97,7 @@ final class UserController extends ApiController
      */
     public function getById(int $id): JsonResponse
     {
-        $users = UserModel::all();
-
-        if (count($users) === 0) {
-            abort(403);
-        }
-
-        $user = $users[0];
-
-        auth()->login($user);
+        $user = authFake();
 
         $this->requestAccessCheck($user);
 

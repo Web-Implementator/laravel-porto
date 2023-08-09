@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Containers\User\Resources;
 
-use App\Ship\Abstracts\Resources\JsonResource;
+use App\Ship\Abstracts\Resources\JsonResourceAbstract;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-final class UserResource extends JsonResource
+final class UserResource extends JsonResourceAbstract
 {
     /**
      * Indicates if the resource's collection keys should be preserved.
