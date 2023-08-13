@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Ship\Abstracts\Transporters;
 
-use App\Ship\Contracts\DataInterface;
 use Spatie\LaravelData\Data as SpatieData;
 
-abstract class DataAbstract extends SpatieData implements DataInterface
+abstract class DataAbstract extends SpatieData
 {
-
+    /**
+     * @return int|string
+     */
+    abstract public function getPrimaryId(): int|string;
 }

@@ -44,6 +44,6 @@ final class JsonCast extends CastsAttributesAbstract
             return $value;
         }
 
-        throw new Exception('Не известный тип');
+        throw new Exception('Error set yupe');
     }
 }
