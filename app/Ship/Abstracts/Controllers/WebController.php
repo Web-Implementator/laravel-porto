@@ -34,7 +34,8 @@ abstract class WebController extends ControllerAbstract
     /**
      * Initialize policies
      *
-     * @see \App\Ship\Abstracts\Controllers\Controller
+     * @see \App\Ship\Traits\PolicyTrait
+     *
      * @return ?string
      */
     abstract protected function initPolicyModel(): ?string;

@@ -13,7 +13,7 @@ final class ValidateSignature extends IlluminateValidateSignature
      *
      * @var array<int, string>
      */
-    protected $except = [
+    protected array $except = [
         // 'fbclid',
         // 'utm_campaign',
         // 'utm_content',

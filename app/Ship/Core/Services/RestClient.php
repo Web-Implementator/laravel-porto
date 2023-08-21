@@ -28,7 +28,7 @@ final class RestClient extends Client
     {
         parent::__construct($config);
 
-        $this->getHandler()->push(fn(callable $handler) => function (RequestInterface $request, array $options) use ($handler) {
+        $this->getHandler()->push(fn (callable $handler) => function (RequestInterface $request, array $options) use ($handler) {
 
             $this->setLastRequest($request);
             $this->setLastResponse(null);
@@ -36,7 +36,7 @@ final class RestClient extends Client
             /** @var FulfilledPromise $promise */
             $promise = $handler($request, $options);
 
-            return $promise->then(fn(ResponseInterface $response) => $this->lastResponse = $response);
+            return $promise->then(fn (ResponseInterface $response) => $this->lastResponse = $response);
         });
     }
 

@@ -72,6 +72,9 @@ make migrate
 
 ### Additional features
 
+Rules for pint.json
+https://mlocati.github.io/php-cs-fixer-configurator/
+
 Generate container
 ``` bash
 docker-compose exec app php artisan make:container Test

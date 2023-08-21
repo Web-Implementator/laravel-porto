@@ -35,6 +35,8 @@ final class ApiResponse
                     'data' => [],
                 ];
 
+                var_dump($exception->getMessage());
+
                 $responseException = $this->addMessage(
                     $responseException,
                     'По вашему запросу ничего не найдено',
@@ -42,7 +44,7 @@ final class ApiResponse
                 );
 
                 return $this->response($responseException, $responseCode);
-            } else if ($exception instanceof RentException) {
+            } elseif ($exception instanceof RentException) {
                 $responseCode = 400;
                 $responseException = [
                     'data' => [],
@@ -55,7 +57,7 @@ final class ApiResponse
                 );
 
                 return $this->response($responseException, $responseCode);
-            } else if ($exception instanceof PolicyException) {
+            } elseif ($exception instanceof PolicyException) {
 
                 $responseCode = 403;
                 $responseException = [

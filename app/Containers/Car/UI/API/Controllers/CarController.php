@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\UI\API\Controllers;
 
-use App\Containers\Car\Actions\GetCarAction;
-use App\Containers\Car\Actions\GetCarsAction;
-use App\Containers\Car\Data\Transporters\GetCarDTO;
-use App\Containers\Car\Models\CarModelAbstract;
+use App\Containers\Car\Actions\CarGetByAction;
+use App\Containers\Car\Actions\CarGetAllAction;
+use App\Containers\Car\Data\Transporters\CarDTO;
+use App\Containers\Car\Models\CarModel;
 use App\Ship\Abstracts\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations as OA;
 
 final class CarController extends ApiController
 {
@@ -17,11 +18,12 @@ final class CarController extends ApiController
      * PolicyAbstract for current Controller
      *
      * @see WebController
+     *
      * @return ?string
      */
     protected function initPolicyModel(): ?string
     {
-        return CarModelAbstract::class;
+        return CarModel::class;
     }
 
     /**
@@ -30,26 +32,31 @@ final class CarController extends ApiController
      *      operationId="carGetAll",
      *      tags={"Car"},
      *      summary="Получение списка автомобилей",
+     *
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
+     *
      *          @OA\MediaType(
      *           mediaType="application/json",
      *          )
      *      ),
+     *
      *      @OA\Response(
      *          response=500,
      *          description="Service Unavailable",
+     *
      *          @OA\MediaType(
      *           mediaType="application/json",
      *          )
      *      ),
      *  )
-     * @return JsonResponse
      */
     public function getAll(): JsonResponse
     {
-        return $this->response($this->action(GetCarsAction::class));
+        $action = $this->action(CarGetAllAction::class, CarDTO::from([]));
+
+        return $this->response($action);
     }
 
     /**
@@ -58,38 +65,42 @@ final class CarController extends ApiController
      *      operationId="carGetById",
      *      tags={"Car"},
      *      summary="Получить автомобиль по ID",
+     *
      *      @OA\Parameter(
      *          description="ID Car",
      *          in="path",
      *          name="id",
      *          required=true,
      *          example="1",
+     *
      *          @OA\Schema(
      *              type="integer",
      *              format="int64"
      *          )
      *      ),
+     *
      *      @OA\Response(
      *          response=200,
      *          description="Successful operation",
+     *
      *          @OA\MediaType(
      *           mediaType="application/json",
      *          )
      *      ),
+     *
      *      @OA\Response(
      *          response=500,
      *          description="Service Unavailable",
+     *
      *          @OA\MediaType(
      *           mediaType="application/json",
      *          )
      *      ),
      *  )
-     * @param int $id
-     * @return JsonResponse
      */
     public function getById(int $id): JsonResponse
     {
-        $response['data'] = $this->action(GetCarAction::class, GetCarDTO::from(['carId' => $id]));
+        $response['data'] = $this->action(CarGetByAction::class, CarDTO::from(['carId' => $id]));
 
         return $this->response($response);
     }

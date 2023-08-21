@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Containers\Car\Resources;
 
 use App\Ship\Abstracts\Resources\JsonResourceAbstract;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 final class CarResource extends JsonResourceAbstract
 {

@@ -14,7 +14,11 @@ use Illuminate\Routing\Controller as IlluminateController;
 
 abstract class ControllerAbstract extends IlluminateController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, UiTrait, PolicyTrait;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
+    use UiTrait;
+    use PolicyTrait;
 
     /**
      * @param string $method

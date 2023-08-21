@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Resources;
 
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 final class RentCollection extends ResourceCollection
 {
@@ -25,7 +25,7 @@ final class RentCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => $this->collection
+            'data' => $this->collection,
         ];
     }
 }

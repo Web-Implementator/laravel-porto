@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace App\Ship\Core\Providers;
 
+use App\Containers\Car\Events\CarCacheEvent;
+use App\Containers\Car\Events\RentCacheEvent;
+use App\Containers\Car\Listeners\CarCacheListener;
+use App\Containers\Car\Listeners\RentCacheListener;
+use App\Containers\Car\Models\CarModel;
+use App\Containers\Car\Models\RentModel;
+use App\Containers\Car\Observers\CarObserver;
+use App\Containers\Car\Observers\RentObserver;
 use App\Ship\Abstracts\Providers\EventServiceProviderAbstract;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 
 final class EventServiceProvider extends EventServiceProviderAbstract
 {
@@ -16,8 +22,11 @@ final class EventServiceProvider extends EventServiceProviderAbstract
      * @const array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        CarCacheEvent::class => [
+            CarCacheListener::class,
+        ],
+        RentCacheEvent::class => [
+            RentCacheListener::class
         ],
     ];
 
@@ -28,6 +37,7 @@ final class EventServiceProvider extends EventServiceProviderAbstract
      */
     public function boot(): void
     {
-        //
+        CarModel::observe(new CarObserver());
+        RentModel::observe(new RentObserver());
     }
 }

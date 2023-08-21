@@ -4,35 +4,58 @@ declare(strict_types=1);
 
 namespace App\Ship\Abstracts\Repositories;
 
+use App\Containers\Car\Data\Transporters\CarDTO;
+use Throwable;
+
 abstract class Repository
 {
     /**
+     * @param mixed $dto
      * @return mixed
      */
-    abstract public function getAll(): mixed;
+    abstract public function getAll(mixed $dto): mixed;
 
     /**
-     * @param string|int $id
+     * @param mixed $dto
      * @return mixed
      */
-    abstract public function getByID(string|int $id): mixed;
+    abstract public function getBy(mixed $dto): mixed;
 
     /**
-     * @param array $data
+     * @param mixed $dto
      * @return mixed
      */
-    abstract public function create(array $data): mixed;
+    abstract public function create(mixed $dto): mixed;
 
     /**
-     * @param string|int $id
-     * @param array $data
+     * @param mixed $dto
      * @return mixed
      */
-    abstract public function update(string|int $id, array $data): mixed;
+    abstract public function update(mixed $dto): mixed;
 
     /**
-     * @param string|int $id
+     * @param mixed $dto
      * @return void
      */
-    abstract public function delete(string|int $id): void;
+    abstract public function delete(mixed $dto): void;
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function getCache(string $key): mixed
+    {
+        try {
+            if (cache()->has($key)) {
+                $cache = cache()->get($key);
+
+                return !empty($cache) && is_string($cache) ? json_decode($cache) : $cache;
+            }
+
+        } catch (Throwable $exc) {
+
+        }
+
+        return  null;
+    }
 }

@@ -8,5 +8,4 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 abstract class JsonResourceAbstract extends JsonResource
 {
-
 }

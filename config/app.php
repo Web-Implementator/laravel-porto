@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Ship\Core\Providers\AppServiceProvider;
 use App\Ship\Core\Providers\AuthServiceProvider;
 use App\Ship\Core\Providers\EventServiceProvider;
-use App\Ship\Core\Providers\RouteServiceProvider;
-use App\Ship\Core\Providers\AppServiceProvider;
 use App\Ship\Core\Providers\HorizonServiceProvider;
+use App\Ship\Core\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [

@@ -8,5 +8,4 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 
 abstract class EventServiceProviderAbstract extends EventServiceProvider
 {
-
 }

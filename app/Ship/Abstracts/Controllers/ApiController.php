@@ -14,10 +14,12 @@ use OpenApi\Annotations as OA;
  *      version="1.2.1",
  *      title="Integration Swagger in Laravel 10",
  *      description="Implementation of Swagger with in Laravel 10",
+ *
  *      @OA\Contact(
  *          email="slava.akulov.1996@gmail.com"
  *      ),
  * )
+ *
  * @OA\Server(
  *      url=L5_SWAGGER_CONST_HOST,
  *      description="Demo API Server"
@@ -45,7 +47,8 @@ abstract class ApiController extends ControllerAbstract
     /**
      * Initialize policies
      *
-     * @see \App\Ship\Abstracts\Controllers\Controller
+     * @see \App\Ship\Traits\PolicyTrait
+     *
      * @return ?string
      */
     abstract protected function initPolicyModel(): ?string;

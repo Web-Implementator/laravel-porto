@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Actions;
 
+use App\Containers\Car\Data\Enums\CarStatusEnum;
 use App\Containers\Car\Data\Repositories\CarRepository;
 use App\Containers\Car\Data\Repositories\RentRepository;
-use App\Containers\Car\Data\Enums\CarStatusEnum;
-use App\Containers\Car\Data\Transporters\RentCarDTO;
+use App\Containers\Car\Data\Transporters\CarDTO;
+use App\Containers\Car\Data\Transporters\RentDTO;
 use App\Containers\Car\Resources\CarResource;
-use App\Ship\Core\Exceptions\RentException;
 use App\Ship\Abstracts\Actions\Action;
-use Carbon\Carbon, Exception, DB;
+use App\Ship\Core\Exceptions\RentException;
+use DB;
 
 final class RentCarAction extends Action
 {
+    /**
+     * @param CarRepository $carRepository
+     * @param RentRepository $rentRepository
+     */
     public function __construct(
         protected CarRepository $carRepository,
         protected RentRepository $rentRepository,
@@ -22,24 +27,27 @@ final class RentCarAction extends Action
     }
 
     /**
-     * @param RentCarDTO $dto
+     * @param RentDTO $dto
      * @return CarResource
-     * @throws Exception
+     * @throws RentException
      */
-    public function run(RentCarDTO $dto): CarResource
+    public function run(RentDTO $dto): CarResource
     {
         return DB::transaction(function () use ($dto) {
-            $carId = $dto->getPrimaryId();
-            $userId = $dto->userId;
+            $carId = $dto->carId;
 
-            $car = $this->carRepository->getByID($carId);
+            $carDto = CarDTO::from([
+                'carId' => $carId
+            ]);
+
+            $car = $this->carRepository->getBy($carDto);
 
             if ($car['status_id'] !== CarStatusEnum::free->value) {
                 throw new RentException('Автомобиль уже арендуют');
             }
 
-            $rent = $this->rentRepository->getByUserId($userId);
-            if (!empty($rent)) {
+            $rent = $this->rentRepository->getBy($dto);
+            if (! empty($rent)) {
                 if ($rent['car_id'] !== $carId) {
                     throw new RentException('Вы уже взяли другой автомобиль в аренду');
                 }
@@ -47,15 +55,11 @@ final class RentCarAction extends Action
                 throw new RentException('Вы уже арендуете этот автомобиль');
             }
 
-            $this->rentRepository->create([
-                'car_id' => $carId,
-                'user_id' => $userId,
-                'begin_at' => Carbon::now()
-            ]);
+            $this->rentRepository->create($dto);
 
-            return $this->carRepository->update($carId, [
-                'status_id' => CarStatusEnum::busy->value
-            ]);
+            return $this->carRepository->update($carDto->add([
+                'statusId' => CarStatusEnum::busy->value
+            ]));
         });
     }
 }

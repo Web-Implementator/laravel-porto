@@ -28,7 +28,6 @@ abstract class RouteServiceProviderAbstract extends RouteServiceProvider
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
-     *
      * @return void
      */
     public function boot(): void
@@ -52,14 +51,13 @@ abstract class RouteServiceProviderAbstract extends RouteServiceProvider
 
     /**
      * Register Api routes for containers
-     *
      * @return void
      */
     protected function mapApi(): void
     {
         $paths_api = array_merge(
-            glob(app_path() . '/Containers/*/*/UI/API/Routes/api.php'),
-            glob(app_path() . '/Containers/*/UI/API/Routes/api.php')
+            glob(app_path().'/Containers/*/*/UI/API/Routes/api.php'),
+            glob(app_path().'/Containers/*/UI/API/Routes/api.php')
         );
 
         $api_version = $this->getApiVersion();
@@ -73,11 +71,11 @@ abstract class RouteServiceProviderAbstract extends RouteServiceProvider
             $container_name_sub_lower = strtolower($container_name_sub);
 
             if ($container_name_sub_lower !== 'ui') {
-                $prefix = "api/$api_version/$container_name_sub_lower";
+                $prefix = "/api/$api_version/$container_name_sub_lower";
                 $name = "api.$api_version.$container_name_lower.$container_name_sub_lower.";
                 $namespace = "$this->namespace\\$container_name\\$container_name_sub\\UI\\API\\Controllers";
             } else {
-                $prefix = "api/$api_version/$container_name_lower";
+                $prefix = "/api/$api_version/$container_name_lower";
                 $name = "api.$api_version.$container_name_lower.";
                 $namespace = "$this->namespace\\$container_name\\UI\\API\\Controllers";
             }
@@ -92,14 +90,13 @@ abstract class RouteServiceProviderAbstract extends RouteServiceProvider
 
     /**
      * Register Web routes for containers
-     *
      * @return void
      */
     protected function mapWeb(): void
     {
         $paths_web = array_merge(
-            glob(app_path() . '/Containers/*/*/UI/Web/Routes/web.php'),
-            glob(app_path() . '/Containers/*/UI/Web/Routes/web.php')
+            glob(app_path().'/Containers/*/*/UI/Web/Routes/web.php'),
+            glob(app_path().'/Containers/*/UI/Web/Routes/web.php')
         );
 
         foreach ($paths_web as $path) {
@@ -128,7 +125,6 @@ abstract class RouteServiceProviderAbstract extends RouteServiceProvider
 
     /**
      * Configure the rate limiters for the application.
-     *
      * @return void
      */
     protected function configureRateLimiting(): void
@@ -148,6 +144,7 @@ abstract class RouteServiceProviderAbstract extends RouteServiceProvider
 
     /**
      * @param string $api_version
+     * @return void
      */
     public function setApiVersion(string $api_version): void
     {

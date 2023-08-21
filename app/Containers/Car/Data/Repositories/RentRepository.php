@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Repositories;
 
-use App\Containers\Car\Models\RentModelAbstract;
+use App\Containers\Car\Data\Transporters\RentDTO;
+use App\Containers\Car\Models\RentModel;
 use App\Containers\Car\Resources\RentCollection;
 use App\Containers\Car\Resources\RentResource;
 use App\Ship\Abstracts\Repositories\Repository;
@@ -12,71 +13,90 @@ use App\Ship\Abstracts\Repositories\Repository;
 final class RentRepository extends Repository
 {
     /**
+     * @param RentDTO $dto
      * @return RentCollection
      */
-    public function getAll(): RentCollection
+    public function getAll(mixed $dto): RentCollection
     {
-        return new RentCollection(RentModelAbstract::get());
-    }
+        $isCache = $dto->isCache;
 
-    /**
-     * @param int|string $id
-     * @return RentResource
-     */
-    public function getByID(int|string $id): RentResource
-    {
-        return new RentResource(RentModelAbstract::findOrFail($id));
-    }
-
-    /**
-     * @param int $car_id
-     * @return RentResource|null
-     */
-    public function getByCarId(int $car_id): ?RentResource
-    {
-        $query = RentModelAbstract::active()->carId($car_id)->first();
-
-        if (!empty($query)) {
-            return new RentResource($query);
+        if ($isCache === true) {
+            $collection = $this->getCache('rent:all');
         }
 
-        return null;
+        $collection =  $collection ?? RentModel::get();
+
+        return new RentCollection($collection);
     }
 
     /**
-     * @param int $user_id
+     * @param RentDTO $dto
+     * @return RentResource
+     */
+    public function getByID(mixed $dto): RentResource
+    {
+        $rentId = $dto->getPrimaryId();
+        $isCache = $dto->isCache;
+
+        if ($isCache === true) {
+            $collection = $this->getCache("rent:$rentId");
+        }
+
+        $collection = $collection ?? RentModel::findOrFail($rentId);
+
+        return new RentResource($collection);
+    }
+
+    /**
+     * @param RentDTO $dto
      * @return ?RentResource
      */
-    public function getByUserId(int $user_id): ?RentResource
+    public function getBy(mixed $dto): ?RentResource
     {
-        $query = RentModelAbstract::active()->userId($user_id)->first();
+        $rentId = $dto->getPrimaryId();
+        if (!empty($rentId)) {
+            $entity = $dto->isCache === true ? $this->getCache("rent:$rentId") : RentModel::findOrFail($rentId);
+        } else {
+            $query = RentModel::query()->active();
 
-        if (!empty($query)) {
-            return new RentResource($query);
+            $carId = $dto->carId;
+            if (!empty($carId)) {
+                $query->carId($carId);
+            }
+
+            $userId = $dto->userId;
+            if (!empty($userId)) {
+                $query->userId($userId);
+            }
+
+            $entity = $query->first();
+        }
+
+        if (!empty($entity)) {
+            return new RentResource($entity);
         }
 
         return null;
     }
 
     /**
-     * @param array $data
+     * @param RentDTO $dto
      * @return RentResource
      */
-    public function create(array $data): RentResource
+    public function create(mixed $dto): RentResource
     {
-        return new RentResource(RentModelAbstract::create($data));
+        return new RentResource(RentModel::create($dto->toDataBase()));
     }
 
     /**
-     * @param int|string $id
-     * @param array $data
+     * @param RentDTO $dto
      * @return RentResource
      */
-    public function update(int|string $id, array $data): RentResource
+    public function update(mixed $dto): RentResource
     {
-        $model = RentModelAbstract::findOrFail($id);
+        $model = RentModel::findOrFail($dto->getPrimaryId());
 
-        $model->fill($data);
+        $model->fill($dto->toDataBase());
 
         $model->save();
 
@@ -84,11 +104,11 @@ final class RentRepository extends Repository
     }
 
     /**
-     * @param int|string $id
+     * @param RentDTO $dto
      * @return void
      */
-    public function delete(int|string $id): void
+    public function delete(mixed $dto): void
     {
-        RentModelAbstract::destroy($id);
+        RentModel::destroy($dto->getPrimaryId());
     }
 }

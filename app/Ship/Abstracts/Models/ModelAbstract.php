@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Ship\Abstracts\Models;
 
-use App\Ship\Contracts\ModelInterface;
+use App\Ship\Interfaces\ModelInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -17,4 +17,27 @@ abstract class RequestApi extends RequestAbstract
     {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()], 422));
     }
+
+    /**
+     * Prepare inputs for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'isActive' => $this->toBoolean($this->isActive),
+        ]);
+    }
+
+    /**
+     * Convert to boolean
+     *
+     * @param mixed $value
+     * @return bool
+     */
+    private function toBoolean(mixed $value): bool
+    {
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    }
 }

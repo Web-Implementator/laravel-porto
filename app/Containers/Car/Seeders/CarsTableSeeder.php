@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Containers\Car\Seeders;
 
-use App\Containers\Car\Models\CarModelAbstract;
+use App\Containers\Car\Models\CarModel;
+use App\Ship\Helpers\AppHelper;
 use Illuminate\Database\Seeder;
 
 final class CarsTableSeeder extends Seeder
@@ -14,8 +17,8 @@ final class CarsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        if (isLocal()) {
-            CarModelAbstract::factory(10)->create();
+        if (AppHelper::isLocal()) {
+            CarModel::factory(100)->create();
         }
     }
 }

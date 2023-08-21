@@ -10,12 +10,12 @@ use Illuminate\Console\Scheduling\Schedule;
 final class KernelConsole extends KernelConsoleAbstract
 {
     /**
-     * @param  Schedule  $schedule
+     * @param Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule): void
     {
-        parent::schedule();
+        parent::schedule($schedule);
     }
 
     /**

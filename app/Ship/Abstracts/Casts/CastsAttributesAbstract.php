@@ -8,5 +8,4 @@ use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 abstract class CastsAttributesAbstract implements CastsAttributes
 {
-
 }

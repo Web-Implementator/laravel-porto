@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Containers\Car\Factories;
 
-use App\Containers\Car\Models\CarModelAbstract;
+use App\Containers\Car\Models\CarModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Str;
 
 /**
- * @extends Factory<CarModelAbstract>
+ * @extends Factory<CarModel>
  */
 final class CarModelFactory extends Factory
 {
@@ -16,7 +18,7 @@ final class CarModelFactory extends Factory
      *
      * @var string
      */
-    protected $model = CarModelAbstract::class;
+    protected $model = CarModel::class;
 
     /**
      * Define the model's default state.

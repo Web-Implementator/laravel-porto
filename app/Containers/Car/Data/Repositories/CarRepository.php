@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Data\Repositories;
 
-use App\Containers\Car\Models\CarModelAbstract;
+use App\Containers\Car\Data\Transporters\CarDTO;
+use App\Containers\Car\Models\CarModel;
 use App\Containers\Car\Resources\CarCollection;
 use App\Containers\Car\Resources\CarResource;
 use App\Ship\Abstracts\Repositories\Repository;
@@ -12,41 +13,59 @@ use App\Ship\Abstracts\Repositories\Repository;
 final class CarRepository extends Repository
 {
     /**
+     * @param CarDTO $dto
      * @return CarCollection
      */
-    public function getAll(): CarCollection
+    public function getAll(mixed $dto): CarCollection
     {
-        return new CarCollection(CarModelAbstract::active()->get());
+        $isCache = $dto->isCache;
+
+        if ($isCache === true) {
+            $collection = $this->getCache('car:all');
+        }
+
+        $collection =  $collection ?? CarModel::active()->get();
+
+        return new CarCollection($collection);
     }
 
     /**
-     * @param int|string $id
+     * @param CarDTO $dto
      * @return CarResource
      */
-    public function getByID(int|string $id): CarResource
+    public function getBy(mixed $dto): CarResource
     {
-        return new CarResource(CarModelAbstract::active()->findOrFail($id));
+        $carId = $dto->getPrimaryId();
+
+        $isCache = $dto->isCache;
+
+        if ($isCache === true) {
+            $collection = $this->getCache("car:$carId");
+        }
+
+        $collection = $collection ?? CarModel::findOrFail($carId);
+
+        return new CarResource($collection);
     }
 
     /**
-     * @param array $data
+     * @param CarDTO $dto
      * @return CarResource
      */
-    public function create(array $data): CarResource
+    public function create(mixed $dto): CarResource
     {
-        return new CarResource(CarModelAbstract::create($data));
+        return new CarResource(CarModel::create($dto->toDataBase()));
     }
 
     /**
-     * @param int|string $id
-     * @param array $data
+     * @param CarDTO $dto
      * @return CarResource
      */
-    public function update(int|string $id, array $data): CarResource
+    public function update(mixed $dto): CarResource
     {
-        $model = CarModelAbstract::findOrFail($id);
+        $model = CarModel::findOrFail($dto->getPrimaryId());
 
-        $model->fill($data);
+        $model->fill($dto->toDataBase());
 
         $model->save();
 
@@ -54,11 +73,11 @@ final class CarRepository extends Repository
     }
 
     /**
-     * @param int|string $id
+     * @param CarDTO $dto
      * @return void
      */
-    public function delete(int|string $id): void
+    public function delete(mixed $dto): void
     {
-        CarModelAbstract::destroy($id);
+        CarModel::destroy($dto->getPrimaryId());
     }
 }

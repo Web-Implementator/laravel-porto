@@ -12,7 +12,8 @@ use Illuminate\Foundation\Testing\TestCase as IlluminateTestCase;
 
 abstract class PhpUnitAbstract extends IlluminateTestCase
 {
-    use CreatesApplication, LazilyRefreshDatabase;
+    use CreatesApplication;
+    use LazilyRefreshDatabase;
 
     /**
      * Refresh the in-memory database.
@@ -29,7 +30,7 @@ abstract class PhpUnitAbstract extends IlluminateTestCase
      */
     protected function refreshTestDatabase(): void
     {
-        if (!RefreshDatabaseState::$migrated) {
+        if (! RefreshDatabaseState::$migrated) {
             $this->artisan('migrate:fresh', $this->migrateFreshUsing());
 
             $this->app[Kernel::class]->setArtisan(null);

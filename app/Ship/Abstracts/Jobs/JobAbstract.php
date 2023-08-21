@@ -13,7 +13,10 @@ use Exception;
 
 abstract class JobAbstract implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * The job failed to process.
@@ -25,8 +28,8 @@ abstract class JobAbstract implements ShouldQueue
     public function failed(Exception $exception): void
     {
         // Send user notification of failure, etc...
-//        if (app()->bound('sentry')) {
-//            app('sentry')->captureException($exception);
-//        }
+        //        if (app()->bound('sentry')) {
+        //            app('sentry')->captureException($exception);
+        //        }
     }
 }

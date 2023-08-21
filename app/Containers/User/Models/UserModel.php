@@ -7,6 +7,7 @@ namespace App\Containers\User\Models;
 use App\Containers\User\Factories\UserModelFactory;
 use App\Ship\Abstracts\Models\AuthenticationModelAbstract;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -14,7 +15,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 final class UserModel extends AuthenticationModelAbstract
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The table associated with the model.
@@ -85,5 +88,14 @@ final class UserModel extends AuthenticationModelAbstract
     {
         return $query->where('id', $id);
     }
-}
 
+    /**
+     * @return Attribute
+     */
+    public function password():  Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => bcrypt($value)
+        );
+    }
+}

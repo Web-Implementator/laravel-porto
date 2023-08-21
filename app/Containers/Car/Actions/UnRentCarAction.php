@@ -4,17 +4,23 @@ declare(strict_types=1);
 
 namespace App\Containers\Car\Actions;
 
+use App\Containers\Car\Data\Enums\CarStatusEnum;
 use App\Containers\Car\Data\Repositories\CarRepository;
 use App\Containers\Car\Data\Repositories\RentRepository;
-use App\Containers\Car\Data\Enums\CarStatusEnum;
-use App\Containers\Car\Data\Transporters\UnRentCarDTO;
+use App\Containers\Car\Data\Transporters\CarDTO;
+use App\Containers\Car\Data\Transporters\RentDTO;
 use App\Containers\Car\Resources\CarResource;
-use App\Ship\Core\Exceptions\RentException;
 use App\Ship\Abstracts\Actions\Action;
-use Exception, Carbon\Carbon, DB;
+use App\Ship\Core\Exceptions\RentException;
+use Carbon\Carbon;
+use DB;
 
 final class UnRentCarAction extends Action
 {
+    /**
+     * @param CarRepository $carRepository
+     * @param RentRepository $rentRepository
+     */
     public function __construct(
         protected CarRepository $carRepository,
         protected RentRepository $rentRepository,
@@ -22,35 +28,35 @@ final class UnRentCarAction extends Action
     }
 
     /**
-     * @param UnRentCarDTO $dto
+     * @param RentDTO $dto
      * @return CarResource
-     * @throws Exception
+     * @throws RentException
      */
-    public function run(UnRentCarDTO $dto): CarResource
+    public function run(RentDTO $dto): CarResource
     {
         return DB::transaction(function () use ($dto) {
-            $userId = $dto->userId;
-
-            $rent = $this->rentRepository->getByUserId($userId);
+            $rent = $this->rentRepository->getBy($dto);
             if (empty($rent)) {
                 throw new RentException('У вас нет активной аренды');
             }
 
-            $carId = $rent['car_id'];
-
-            $car = $this->carRepository->getByID($carId);
-
-            $this->rentRepository->update($rent['id'], [
-                'end_at' => Carbon::now()
+            $carDto = CarDTO::from([
+               'carId' => $rent['car_id'],
             ]);
 
+            $car = $this->carRepository->getBy($carDto);
             if ($car['status_id'] !== CarStatusEnum::busy->value) {
                 throw new RentException('Не возможно отменить аренду у свободного автомобиля');
             }
 
-            return $this->carRepository->update($carId, [
-                'status_id' => CarStatusEnum::free->value
-            ]);
+            $this->rentRepository->update($dto->add([
+                'rentId' => $rent->id,
+                'endAt' => now(),
+            ]));
+
+            return $this->carRepository->update($carDto->add([
+                'statusId' => CarStatusEnum::free->value
+            ]));
         });
     }
 }
